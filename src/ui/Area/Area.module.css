@@ -1,0 +1,30 @@
+.area_container {
+    width: 100%;
+    height: max-content;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.area_title {
+
+    font-size: 12px;
+}
+
+.area_input {
+
+    width: 100%;
+    min-height: 400px;
+    gap: 4px;
+
+    /*  */
+
+
+    border-radius: 40px;
+    border: 1px solid #E9E9E9;
+    background: #FFF;
+    outline: none;
+
+    padding-left: 20px;
+}
+

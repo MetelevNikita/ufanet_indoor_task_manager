@@ -1,0 +1,48 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "title",
+            "type": "input",
+            "title" : "title_input",
+            "placeholder": "тестовый инпут"
+        },
+
+        {
+            "id": 2,
+            "name": "selector",
+            "type": "select",
+            "title" : "select_input",
+            "placeholder": "тестовый селектор",
+            "arr": [
+                {
+                    "id": 0,
+                    "label": "Выберите действие",
+                    "value": "default"
+                },
+                {
+                    "id": 1,
+                    "label": "Один",
+                    "value": "One"
+                },
+                {
+                    "id": 2,
+                    "label": "два",
+                    "value": "two"
+                },
+                {
+                    "id": 3,
+                    "label": "Три",
+                    "value": "three"
+                }
+            ] 
+        },
+        {
+            "id": 3,
+            "name": "file",
+            "type": "file",
+            "title" : "file_input",
+            "placeholder": "Файловый инпут"
+        }
+    ]
+}
