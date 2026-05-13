@@ -191,32 +191,30 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
         }
 
 
+        const resultYGmessage = await postData(`${url}/tasks`,
+            {
+                title: basicMessage,
+                columnId: correctColumn.data.id,
+                description: messageYouGile,
 
+            },
+            `Задача в YouGile успешно создана`,
+            `Ошибка создания задачи в YouGile`,
+            apiKey as string
+        )
 
-        // const resultYGmessage = await postData(`${url}/tasks`,
-        //     {
-        //         title: basicMessage,
-        //         columnId: correctColumn.data.id,
-        //         description: messageYouGile,
+        if (!resultYGmessage.success) {
+            throw new Error('Сетевая ошибка отправки задачи в Yougile')
+        }
 
-        //     },
-        //     `Задача в YouGile успешно создана`,
-        //     `Ошибка создания задачи в YouGile`,
-        //     apiKey as string
-        // )
+        // sendToTelegram
 
-        // if (!resultYGmessage.success) {
-        //     throw new Error('Сетевая ошибка отправки задачи в Yougile')
-        // }
+        const bot = await telegramBot()
+        const botName = await bot.getMe()
+        console.log(`Отправляем сообщение от имени бота ${botName.first_name}`)
 
-        // // sendToTelegram
-
-        // const bot = await telegramBot()
-        // const botName = await bot.getMe()
-        // console.log(`Отправляем сообщение от имени бота ${botName.first_name}`)
-
-        // const resultTGMessage = await bot.sendMessage(process.env.TG_ID_GROUP as string, messageTelegram, {parse_mode: 'HTML'})
-        // console.log(resultTGMessage)
+        const resultTGMessage = await bot.sendMessage(process.env.TG_ID_GROUP as string, messageTelegram, {parse_mode: 'HTML'})
+        console.log(resultTGMessage)
 
 
         return NextResponse.json({
