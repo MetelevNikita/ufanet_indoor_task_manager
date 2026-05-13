@@ -10,7 +10,7 @@ import styles from './File.module.css'
 // icon
 
 import { BsArrowBarDown } from "react-icons/bs";
-import { div } from 'motion/react-client';
+
 
 interface FileProps {
     title: string
@@ -18,25 +18,18 @@ interface FileProps {
     value: string
     onChange: (e: any) => any
     data: any
+    name: string
 }
 
-const File: FC<FileProps> = ({ title, placeholder, value, onChange, data }) => {
+const File: FC<FileProps> = ({ title, name, placeholder, value, onChange, data }) => {
 
     const [image, setImage] = useState<string | null>(null)
 
+
     useEffect(() => {
-        const ext = data?.type.split('/')[1] ?? ''
-
-        if (ext === 'png' || ext === 'jpeg' || ext === 'jpg' || ext === 'tiff') {
-            const previewImage = URL.createObjectURL(data)
-            setImage(previewImage)
-        }
+            if (!data) return
+            setImage(data)
     }, [value])
-
-
-
-
-
 
 
   return (
@@ -44,12 +37,12 @@ const File: FC<FileProps> = ({ title, placeholder, value, onChange, data }) => {
     <div className={styles.file_container}>
 
         <span className={styles.file_title}>{title}</span>
-        <label className={styles.file_label} htmlFor='file'>
+        <label className={styles.file_label} htmlFor={name}>
             <motion.div initial={{rotate: -90}} whileTap={{scale: 1.1}} whileHover={{rotate: 0}} className={styles.file_button_wrapper}>
                 <BsArrowBarDown className={styles.file_button_icon}/>
             </motion.div>
 
-            <input className={styles.file_input} id={'file'} type={'file'} onChange={onChange}/>
+            <input className={styles.file_input} name={name} id={name} type={'file'} onChange={onChange}/>
             <div className={styles.file_placeholder}>{(data) ? data.name : placeholder}</div>
         </label>
 

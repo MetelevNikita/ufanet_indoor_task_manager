@@ -8,17 +8,25 @@ const WEBHOOK_URL = process.env.TG_WEBHOOK_URL
 
 export const POST = async (req: NextRequest) => {
     try {
+        const body = await req.json()
+        console.log('MESSAGE ', body)
 
-        console.log('sadasdasd')
+        
 
-        const update = await req.json()
+        // MESSAGE FROM TG
 
-        console.log(update)
+        const tgMessage = `<b>Тип заказа</b> - ${body.type}\n\n\n<b>Имя</b> - ${body.name}\n\n<b>Город</b> - ${body.city}\n\n<b>Телефон</b> - ${body.phone}\n\n<b>Даьты</b> - ${new Date(body.dateStart).toLocaleDateString('ru-RU')} - ${new Date(body.dateEnd).toLocaleDateString('ru-RU')}\n\n<b>Текст</b> - ${body.text}`
+
+        // 
+
+
+        const bot = new TelegramBot(TOKEN as string)
+        await bot.sendMessage(body.tgid, tgMessage, {parse_mode: 'HTML'})
 
 
         return NextResponse.json({
             success: true,
-            message: "Webhook Telegram установлен",
+            message: "Сообщение в телеграи отправлено",
             data: 'data',
         });
             
@@ -26,7 +34,7 @@ export const POST = async (req: NextRequest) => {
         if (error instanceof Error) {
             return NextResponse.json({
                 succeess: false,
-                message: 'Ошибка Вебхука Telegram',
+                message: 'Ошибка ответа от Telegram',
                 data: null
             })
         }

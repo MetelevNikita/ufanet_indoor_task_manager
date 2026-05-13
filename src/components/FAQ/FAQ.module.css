@@ -1,0 +1,17 @@
+.faq_container {
+
+    height: max-content;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+
+.faq_image {
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+}
+
+.faq_wrapper {}
+
+.faq_text {}

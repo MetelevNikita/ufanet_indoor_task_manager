@@ -1,0 +1,233 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "fio",
+            "type": "input",
+            "title" : "Ваше имя",
+            "placeholder": "имя"
+        },
+        {
+            "id": 2,
+            "name": "city",
+            "type": "input",
+            "title" : "Ваше город",
+            "placeholder": "город"
+        },
+        {
+            "id": 3,
+            "name": "phone",
+            "type": "input",
+            "title" : "Ваш телефон",
+            "placeholder": "8 (000) 00-00-000"
+        },
+        {
+            "id": 4,
+            "name": "tgid",
+            "type": "input",
+            "title" : "Ваш телеграм id (для связи)",
+            "placeholder": "@nickname"
+        },
+        {
+            "id": 5,
+            "name": "date_start",
+            "type": "date",
+            "title" : "Дата начала показа",
+            "placeholder": "дата"
+        },
+        {
+            "id": 6,
+            "name": "date_end",
+            "type": "date",
+            "title" : "Дата окончания показа",
+            "placeholder": "дата"
+        },
+        {
+            "id": 7,
+            "name": "duration",
+            "type": "input",
+            "title" : "Хронометраж видео",
+            "placeholder": "10 секунд"
+        },
+        {
+            "id": 8,
+            "name": "contacts",
+            "type": "area",
+            "title" : "Контактный блок",
+            "placeholder": "до 300 символов"
+        },
+        {
+            "id": 9,
+            "name": "logotype",
+            "type": "file",
+            "title" : "Логотип (необязательно)",
+            "placeholder": ""
+        },
+        {
+            "id": 10,
+            "name": "typeClient",
+            "type": "select",
+            "title" : "Какой тип клиента? (выбрать один)",
+            "placeholder": "",
+            "arr": [
+                {
+                    "id": 1,
+                    "label": "Районный (ищет трафик в 1-м районе)",
+                    "value": "district"
+                },
+                {
+                    "id": 2,
+                    "label": "Городской (ищет трафик по всему городу)",
+                    "value": "city"
+
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "name": "typeProduct",
+            "type": "input",
+            "title" : "Какой продукт / услуга рекламируем? (напишите)",
+            "placeholder": "Укажите конкретный продукт, а не компанию в целом. Пример: «Доставка суши», «Стоматология у дома»"
+        },
+        {
+            "id": 12,
+            "name": "targetСlient",
+            "type": "select",
+            "title" : "Кто целевой клиент в этом ЖК? (выбрать один)",
+            "placeholder": "",
+            "arr": [
+                {
+                    "id": 1,
+                    "label": "Семьи с детьми",
+                    "value": "family"
+                },
+                {
+                    "id": 2,
+                    "label": "Только Женщины",
+                    "value": "wooman"
+                },
+                {
+                    "id": 3,
+                    "label": "Только Мужчины",
+                    "value": "men"
+                },
+                {
+                    "id": 4,
+                    "label": "Молодые холостяки",
+                    "value": "bachelor"
+                },
+                {
+                    "id": 5,
+                    "label": "Любой житель",
+                    "value": "any people"
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "name": "benefit",
+            "type": "area",
+            "title" : "Главная Выгода ролика (1 предложение) Что человек должен понять за 10 секунд?",
+            "placeholder": "Пример: * «Кофе в 1 минуте от подъезда», * «Распродажа  на ассортимент», * «Ремонт телефона за 15 минут »"
+        },
+        {
+            "id": 14,
+            "name": "benefit",
+            "type": "input",
+            "title" : "Будем ли дополнять Главную выгоду – акцией, промокодом, скидкой, спецпредложением?",
+            "placeholder": "Пример: «Скидка 20% до конца месяца», «Первое занятие бесплатно»"
+        },
+        {
+            "id": 15,
+            "name": "result",
+            "type": "select",
+            "title" : "Что человек должен сделать Житель после просмотра ролика?",
+            "placeholder": "",
+            "arr": [
+                {
+                    "id": 1,
+                    "label": "Прийти в точку",
+                    "value": "come to the point"
+                },
+                {
+                    "id": 2,
+                    "label": "Заказать онлайн",
+                    "value": "order online"
+                },
+                {
+                    "id": 3,
+                    "label": "Отсканировать QR",
+                    "value": "scan qr"
+                },
+                {
+                    "id": 4,
+                    "label": "Позвонить",
+                    "value": "call"
+                },
+                {
+                    "id": 5,
+                    "label": "Просто запомнить бренд",
+                    "value": "remember brand"
+                },
+                {
+                    "id": 6,
+                    "label": "Другое",
+                    "value": "other"
+                }
+    
+            ]
+        },
+        {
+            "id": 16,
+            "name": "organization",
+            "type": "input",
+            "title" : "Наименование  организации/бренда",
+            "placeholder": "ООО Комания"
+        },
+        {
+            "id": 17,
+            "name": "agreement",
+            "type": "input",
+            "title" : "Договор",
+            "placeholder": "Номер договора"
+        },
+        {
+            "id": 18,
+            "name": "payment",
+            "type": "select",
+            "title" : "Договор подписан  и оплачен",
+            "placeholder": "Номер договора",
+            "arr": [
+                
+                {
+                    "id": 1,
+                    "label": "Да",
+                    "value": "Yes"
+                },
+                {
+                    "id": 2,
+                    "label": "Нет",
+                    "value": "No"
+
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "name": "inn",
+            "type": "input",
+            "title" : "ИНН",
+            "placeholder": "Введите ИНН"
+        },
+        {
+            "id": 20,
+            "name": "ogrn",
+            "type": "input",
+            "title" : "ОГРН",
+            "placeholder": "Введите ОГРН"
+        }
+ 
+ 
+    ]
+}

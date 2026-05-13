@@ -1,0 +1,49 @@
+{
+    "data": [
+        
+        {
+            "id": 1,
+            "name": "fio",
+            "type": "input",
+            "title" : "Имя",
+            "placeholder": "имя"
+        },
+        {
+            "id": 2,
+            "name": "city",
+            "type": "input",
+            "title" : "Город",
+            "placeholder": "город"
+        },
+        {
+            "id": 3,
+            "name": "phone",
+            "type": "input",
+            "title" : "Телефон",
+            "placeholder": "8 (000) 00-00-000"
+        },
+
+        {
+            "id": 4,
+            "name": "date_start",
+            "type": "date",
+            "title" : "Дата начала показа",
+            "placeholder": "дата"
+        },
+        {
+            "id": 5,
+            "name": "date_end",
+            "type": "date",
+            "title" : "Дата окончания показа",
+            "placeholder": "дата"
+        },
+        {
+            "id": 6,
+            "name": "text",
+            "type": "area",
+            "title": "Текст объявления",
+            "placeholder": "(до 200 символов)"
+        }
+   
+    ]
+}

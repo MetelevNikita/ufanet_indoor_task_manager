@@ -1,0 +1,34 @@
+{
+    "data": [
+        
+        {
+            "id": 1,
+            "name": "fio",
+            "type": "input",
+            "title" : "Ваше имя",
+            "placeholder": "имя"
+        },
+        {
+            "id": 2,
+            "name": "city",
+            "type": "input",
+            "title" : "Ваше город",
+            "placeholder": "город"
+        },
+        {
+            "id": 3,
+            "name": "phone",
+            "type": "input",
+            "title" : "Ваш телефон",
+            "placeholder": "8 (000) 00-00-000"
+        },
+        {
+            "id": 4,
+            "name": "qrcode",
+            "type": "qrcode",
+            "title": "Ссылка на QRcode",
+            "placeholder": "https://example.com"
+        }
+  
+    ]
+}

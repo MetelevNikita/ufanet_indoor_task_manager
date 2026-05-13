@@ -6,7 +6,7 @@
 }
 
 .file_title {
-    font-size: 12px;
+    font-size: 14px;
 } 
 
 .file_label {
@@ -49,7 +49,7 @@
 }
 
 .file_placeholder {
-    font-size: 12px;
+    font-size: 14px;
     color: grey;
 }
 
@@ -62,8 +62,7 @@
 
     /*  */
 
-    width: 60%;
-    height: 100%;
+    width: 30%;
     border-radius: 20px;
 
     /*  */
@@ -74,10 +73,12 @@
     /*  */
 
     margin-top: 10px;
-    margin-bottom: 10pxfun;
+    margin-bottom: 10px;
 
 }
 
 .preview_image_wrapper {
+    
+    object-fit: cover;
 
 }

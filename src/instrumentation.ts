@@ -4,6 +4,7 @@ import TelegramBot from 'node-telegram-bot-api'
 
 import { postData } from "./functions/postData"
 import { getData } from './functions/getData'
+import { error } from 'console'
 
 
 async function getYouGileApiKey () {
@@ -27,7 +28,6 @@ async function getYouGileApiKey () {
     let currentCompany = null as {id: string, name: string, isAdmin: boolean} | null;
 
     if (getCompanys.success === true) {
-        console.log('TEST')
         currentCompany =  getCompanys.data.content.find((current: {id: string, name: string, isAdmin: boolean}) => current.name === 'Company')
     }
 
@@ -119,11 +119,30 @@ async function createWebhookTelegram () {
 
         const bot = new TelegramBot(process.env.TG_BOT_TOKEN as string)
         const resultBot = await bot.setWebHook(`${process.env.WEBHOOK_URL}/api/webhook/telegram` as string)
-        console.log('Бот успешно зарегестрирован ', resultBot)
+        const registredBot = await bot.getMe()
+
+        bot.on('error', (error) => {
+            console.error('Bot error:', error)
+            return {
+                success: false,
+                message: 'Bot error:', error,
+                data: null
+            }
+        })
+
+        bot.on('polling_error', (error) => {
+            console.error('Polling error:', error.message)
+            return {
+                success: false,
+                message: `Polling error: ${error.message}`, 
+                data: null
+            }
+        })
+
         process.env.BOT_CREATED = 'true'
         return {
             success: true,
-            message: 'Бот успешно зарегестрирован ',
+            message: `Бот ${registredBot.first_name} успешно зарегестрирован`,
             data: resultBot
         }
 
@@ -175,28 +194,8 @@ async function createWebHookYouGile () {
             key
         )
 
-        // #### Если нужно удалить подписки
-
-        // for (let item of getAllWebhooks.data) {
-        //    const response = await fetch(`${url}/webhooks/${item.id}`, {
-        //         method: 'PUT',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'Authorization': `Bearer ${key}`
-        //         },
-        //         body: JSON.stringify({
-        //             deleted: true,
-        //             url: `${webhookUrl}/${item.id}`
-        //         })
-        //     })
-
-        //     const data = await response.json()
-        //     console.log('DATA DELETED ', data)
-        // }
 
         // ####
-
-
 
 
         if (!getAllWebhooks.success) {
@@ -223,10 +222,10 @@ async function createWebHookYouGile () {
             return {
                 success: true,
                 message: 'Вебхук YouGile успешно создан',
-                data: webhookUrl
+                data: `${webhookUrl}/api/webhook/yougile`
             }
         } else {
-            return getAllWebhooks.data[0]
+        return getAllWebhooks.data[0]
         }
 
 
@@ -253,6 +252,76 @@ async function createWebHookYouGile () {
     }
 }
 
+async function deleteAllWebhooks () {
+    try {
+
+
+        console.log('# Зауск удаления вебхука YouGile')
+
+        const url = process.env.YG_BASE_URL as string
+        const webhookUrl = process.env.WEBHOOK_URL as string
+        const key = process.env.YG_API_KEY as string
+
+        if (!url || !webhookUrl || !key) {
+            console.log('asdasdasd')
+            return {
+                success: false,
+                message: `Входные данные для создания вебхука отсутсвуют`,
+                data: null
+            }
+        }
+
+        const getAllWebhooks = await getData(
+            `${url}/webhooks`,
+            'Список подписок получен',
+            'Ошибка получения списка подписок',
+            key
+        )
+
+        console.log(getAllWebhooks)
+
+        // #### Если нужно удалить подписки
+
+        for (let item of getAllWebhooks.data) {
+           const response = await fetch(`${url}/webhooks/${item.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${key}`
+                },
+                body: JSON.stringify({
+                    deleted: true,
+                    url: `${webhookUrl}/${item.id}`
+                })
+            })
+
+            const data = await response.json()
+            console.log('DATA DELETED ', data)
+        }
+
+        console.log('Вебхуки очищены')
+        return {
+            success: false,
+            message: `Вебхуки очищены`,
+            data: null
+        }
+    } catch (error: Error | unknown) {
+        if (error instanceof Error) {
+            return {
+                success: false,
+                message: `Ошибка очистки вебхуков ${error.message}`,
+                data: null
+            }
+        }
+
+            return {
+                success: false,
+                message: `Неизвестная ошибка ${error}`,
+                data: null
+            }
+    }
+}
+
 
 
 async function startServices () {
@@ -266,14 +335,16 @@ async function startServices () {
             [
                 await getYouGileApiKey(),
                 await createWebhookTelegram(),
+                await deleteAllWebhooks(),
                 await createWebHookYouGile()
             ]
-        )
+        ).catch((error) => {
+            console.log(error)
+            return error
+        })
 
 
         console.log(result)
-
-
         console.log('Все сервисы запущены')
 
         }

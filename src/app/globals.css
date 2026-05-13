@@ -1,5 +1,13 @@
 @import './reset.css';
 
 html, body {
+  margin: 0;
+  padding: 0;
   background: rgba(247, 247, 245, 1);
 }
+
+
+div {
+  cursor: pointer;
+}
+

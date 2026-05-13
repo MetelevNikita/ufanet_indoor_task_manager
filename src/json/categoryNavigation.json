@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "type": "smartscreen",
+        "direction": "uk",
+        "title": "Для управляющей компании",
+        "subtitle": "Текстовые объявления, QR-код или ролики" ,
+        "endpoint": "uk"
+
+    },
+    {
+        "id": 2,
+        "type": "smartscreen",
+        "direction": "uk",
+        "title": "Для Бизнеса",
+        "subtitle": "Баннер или ролик" ,
+        "endpoint": "business"
+
+    },
+    {
+        "id": 3,
+        "type": "clinic",
+        "direction": "doctor",
+        "title": "Для Минздрава/Главврача",
+        "subtitle": "Субтитрирование готовых роликов, видеоролики «с нуля»" ,
+        "endpoint": "form?direction=clinic&type=doctor_video"
+ 
+
+    },
+    {
+        "id": 4,
+        "type": "clinic",
+        "direction": "business",
+        "title": "Для Бизнеса",
+        "subtitle": "Видеоролик" ,
+        "endpoint": "form?direction=business&type=medical_video" 
+    }
+]

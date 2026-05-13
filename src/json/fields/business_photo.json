@@ -1,0 +1,51 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "fio",
+            "type": "input",
+            "title" : "Ваше имя",
+            "placeholder": "имя"
+        },
+
+        {
+            "id": 3,
+            "name": "phone",
+            "type": "input",
+            "title" : "Ваш телефон",
+            "placeholder": "8 (000) 00-00-000"
+        },
+        {
+            "id": 4,
+            "name": "tgid",
+            "type": "input",
+            "title" : "Ваш телеграм id (для связи)",
+            "placeholder": "@nickname"
+        },
+        {
+            "id": 4,
+            "name": "kontragent",
+            "type": "input",
+            "title" : "Наименование контрагента",
+            "placeholder": "ООО Фирма"
+        },
+
+        {
+            "id": 5,
+            "name": "date",
+            "type": "date",
+            "title" : "Дата фотоотчета",
+            "placeholder": "дата"
+        },
+
+        {
+            "id": 16,
+            "name": "comment",
+            "type": "area",
+            "title" : "Комментарий",
+            "placeholder": "дополнительная информация"
+        }
+
+
+    ]
+}

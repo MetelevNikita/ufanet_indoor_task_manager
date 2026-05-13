@@ -1,0 +1,17 @@
+.title {
+
+    font-size: 24px;
+    font-weight: 500;
+    color: #d81515;
+
+    /*  */
+
+    width: 100%;
+
+    /*  */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}

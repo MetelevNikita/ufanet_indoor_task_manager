@@ -9,7 +9,7 @@
 }
 
 .select_title {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .select_input {
@@ -56,4 +56,9 @@
     /*  */
 
     text-align: center;
+}
+
+
+.other_wrapper {
+    margin-top: 10px;
 }

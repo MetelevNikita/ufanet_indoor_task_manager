@@ -1,0 +1,31 @@
+/* main elements */
+
+
+.title {
+  display: flex;
+  width: max-content;
+  min-height: 80px;
+  padding-left: 40px;
+  padding-right: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  /*  */
+
+  color: white;
+  font-size: 40px;
+
+  /*  */
+
+  border-radius: 48px 48px 0 48px;
+  background: #4208B3;
+}
+
+.subtitle {
+   color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 155.556% */ 
+}

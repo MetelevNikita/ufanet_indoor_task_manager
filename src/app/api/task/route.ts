@@ -5,6 +5,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { postData } from "@/functions/postData";
 import { getData } from "@/functions/getData";
 
+// 
+
+import { saveFile } from "@/lib/saveFile";
+
+// bot
+
+import { telegramBot } from "@/lib/telegramBot";
+
 async function getCurrentColumnId (url: string, key: number | string) {
 
 
@@ -25,13 +33,11 @@ async function getCurrentColumnId (url: string, key: number | string) {
             throw new Error('ERROR')
         }
         const currentProjects = getProjects.data.content.find((project: {title: string}) => project.title == 'Продакшн для ЖК ТВ и ПТВ')
-        
+
         if (!currentProjects) {
              throw new Error(`ОШИБКА! не удалось найти нужный проект`)
         }
         
-
-
         // Доски
 
 
@@ -61,16 +67,20 @@ async function getCurrentColumnId (url: string, key: number | string) {
             key as string
         )
 
-        
         if (!getColumns) {
             throw new Error('ERROR')
         }
 
-        const сurrentColumn = getColumns.data.content.find((column: {title: string}) => column.title === 'Входящие заявки')
+        const сurrentColumn = getColumns.data.content.find((column: {title: string}) => column.title === 'Входящие заявки с сайта ufanet.zakaz') ?? {}
 
         if (!сurrentColumn) {
              throw new Error(`ОШИБКА! не удалось найти нужную колонку`)
         }
+
+
+
+
+
 
         return {
             success: true,
@@ -89,7 +99,7 @@ async function getCurrentColumnId (url: string, key: number | string) {
 }
 
 
-export const POST = async (req: NextRequest) => {
+export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
     try {
 
         const url = process.env.YG_BASE_URL as string
@@ -98,8 +108,77 @@ export const POST = async (req: NextRequest) => {
         // 
 
         const body = await req.json() as any
+        const entries = Object.entries(body)
 
-        // Получаем колонку youGile
+
+        const convertBodyEntries = await Promise.all(Object.entries(body).map(async ([key, value]) => {
+
+            const infoData = value as {fieldName: string, data: string}
+
+            if (typeof infoData.data === 'string' && infoData.data.startsWith('data')) {
+                const data = await saveFile(infoData.data, 'logotypes')
+                return [key, {fieldName: infoData.fieldName, data: data}]
+            } else {
+                return [key, value]
+            }
+
+        }))
+
+        const ObjectEntries = Object.fromEntries(convertBodyEntries)
+
+
+        if (ObjectEntries.length < 1) {
+            return NextResponse.json({
+                success: false,
+                message: 'Сообщение не содержит полей',
+                data: null
+            })
+        }
+
+        function changeObjFromFieldYouGile(data: any): string {
+
+            let arr: string[] = ['Сообщение с сайта ufanet.zakaz']
+
+            for (let item of data) {
+                if (item[1] && typeof item[1] === 'object' && 'fieldName' in item[1] && 'data' in item[1]) {
+                    arr.push(`<strong>${item[1].fieldName}</strong><br><div>${item[1].data}</div>`)
+                } 
+            }
+            return arr.join('<br><br>')
+        }
+
+        function changeObjFromFieldTelegram(data: any): string {
+
+            let arr: string[] = ['Сообщение с сайта ufanet.zakaz']
+
+            for (let item of data) {
+                if (item[1] && typeof item[1] === 'object' && 'fieldName' in item[1] && 'data' in item[1]) {
+                    arr.push(`<b>${item[1].fieldName}</b>\n${item[1].data}`)
+                } 
+            }
+            return arr.join('\n\n')
+        }
+
+        function changeObjFromFieldBasic(data: any): string {
+
+            let arr: string[] = ['Сообщение с сайта ufanet.zakaz']
+
+            for (let item of data) {
+                if (item[1] && typeof item[1] === 'object' && 'fieldName' in item[1] && 'data' in item[1]) {
+                    arr.push(`${item[1].fieldName}:${item[1].data}`)
+                } 
+            }
+            return arr.join(' ')
+        }
+
+
+        const basicMessage = changeObjFromFieldBasic(convertBodyEntries)
+        const messageYouGile = changeObjFromFieldYouGile(convertBodyEntries)
+        const messageTelegram = changeObjFromFieldTelegram(convertBodyEntries)
+    
+
+        // sendToYougle
+
 
         const correctColumn = await getCurrentColumnId(url, apiKey)
 
@@ -112,39 +191,48 @@ export const POST = async (req: NextRequest) => {
         }
 
 
-        // Создаем Таску в Юджайл
 
 
-        const createNewTask = await postData(`${url}/tasks`,
-            {
-                title: 'TEST',
-                columnId: correctColumn.data.id,
-                description: 'TEST',
+        // const resultYGmessage = await postData(`${url}/tasks`,
+        //     {
+        //         title: basicMessage,
+        //         columnId: correctColumn.data.id,
+        //         description: messageYouGile,
 
-            },
-            `Задача в YouGile успешно создана`,
-            `Ошибка создания задачи в YouGile`,
-            apiKey as string
-        )
+        //     },
+        //     `Задача в YouGile успешно создана`,
+        //     `Ошибка создания задачи в YouGile`,
+        //     apiKey as string
+        // )
 
+        // if (!resultYGmessage.success) {
+        //     throw new Error('Сетевая ошибка отправки задачи в Yougile')
+        // }
 
-        if (!createNewTask.success) {
-            throw new Error('Сетевая ошибка отправки задачи в Yougile')
-        }
+        // // sendToTelegram
+
+        // const bot = await telegramBot()
+        // const botName = await bot.getMe()
+        // console.log(`Отправляем сообщение от имени бота ${botName.first_name}`)
+
+        // const resultTGMessage = await bot.sendMessage(process.env.TG_ID_GROUP as string, messageTelegram, {parse_mode: 'HTML'})
+        // console.log(resultTGMessage)
+
 
         return NextResponse.json({
             success: true,
-            message: 'Коллнка входящие найдена',
-            data: correctColumn
+            message: 'Сообщение создано',
+            data: 'Заявка успешно создана'
         })
 
 
         
     } catch (error: Error | unknown) {
         if (error instanceof Error) {
+            console.error(error.message)
             return NextResponse.json({
                 succeess: false,
-                message: `Ошибка создания задачи в Yougile ${error.message}`,
+                message: `Ошибка создания заявки`,
                 data: null
             })
         }

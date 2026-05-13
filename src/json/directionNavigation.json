@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "type": "uk",
+        "category": "smartscreen",
+        "title": "Текстовое объявление",
+        "subtitle": "200 символов" ,
+        "endpoint": "form?direction=uk&type=uk_text"
+    },
+    {
+        "id": 2,
+        "type": "uk",
+        "category": "smartscreen",
+        "title": "Видеоролик",
+        "subtitle": "Адаптировать свой или заказать «с нуля»" ,
+        "endpoint": "form?direction=uk&type=uk_video"
+    },
+    {
+        "id": 3,
+        "type": "uk",
+        "category": "smartscreen",
+        "title": "QR-код",
+        "subtitle": "Ссылка на сайт УК, канал или чат дома" ,
+        "endpoint": "form?direction=uk&type=uk_qrcode"
+    },
+    {
+        "id": 4,
+        "type": "business",
+        "category": "smartscreen",
+        "title": "VIP-баннер",
+        "subtitle": "Ститическое изображение на главном экране" ,
+        "endpoint": "form?direction=business&type=business_banner"
+    },
+    {
+        "id": 5,
+        "type": "business",
+        "category": "smartscreen",
+        "title": "Видеоролик",
+        "subtitle": "Ститическое изображение на главном экране" ,
+        "endpoint": "form?direction=business&type=business_video"
+    },
+    {
+        "id": 6,
+        "type": "business",
+        "category": "smartscreen",
+        "title": "Фотоотчет",
+        "subtitle": "Подготовить фотоотчет" ,
+        "endpoint": "form?direction=business&type=business_photo"
+    }
+]

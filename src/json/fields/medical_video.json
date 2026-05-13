@@ -1,0 +1,133 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "fio",
+            "type": "input",
+            "title" : "Ваше имя",
+            "placeholder": "имя"
+        },
+        {
+            "id": 2,
+            "name": "city",
+            "type": "input",
+            "title" : "Ваше город",
+            "placeholder": "город"
+        },
+        {
+            "id": 3,
+            "name": "phone",
+            "type": "input",
+            "title" : "Ваш телефон",
+            "placeholder": "8 (000) 00-00-000"
+        },
+        {
+            "id": 4,
+            "name": "tgid",
+            "type": "input",
+            "title" : "Ваш телеграм id (для связи)",
+            "placeholder": "@nickname"
+        },
+        {
+            "id": 5,
+            "name": "date_start",
+            "type": "date",
+            "title" : "Дата начала показа",
+            "placeholder": "дата"
+        },
+        {
+            "id": 6,
+            "name": "date_end",
+            "type": "date",
+            "title" : "Дата окончания показа",
+            "placeholder": "дата"
+        },
+        {
+            "id": 7,
+            "name": "title",
+            "type": "input",
+            "title" : "Название Ролика",
+            "placeholder": "введите название"
+        },
+        {
+            "id": 8,
+            "name": "duration",
+            "type": "input",
+            "title" : "Хронометраж видео",
+            "placeholder": "10 секунд"
+        },
+        
+        {
+            "id": 9,
+            "name": "text",
+            "type": "area",
+            "title" : "Основной текст объявления",
+            "placeholder": "до 300 символов"
+        },
+        {
+            "id": 10,
+            "name": "contacts",
+            "type": "area",
+            "title" : "Контактный блок",
+            "placeholder": "до 300 символов"
+        },
+        {
+            "id": 11,
+            "name": "logotype",
+            "type": "file",
+            "title" : "Логотип (необязательно)",
+            "placeholder": ""
+        },
+        {
+            "id": 12,
+            "name": "organization",
+            "type": "input",
+            "title" : "Наименование  организации/бренда",
+            "placeholder": "ООО Комания"
+        },
+        {
+            "id": 13,
+            "name": "agreement",
+            "type": "input",
+            "title" : "Договор",
+            "placeholder": "Номер договора"
+        },
+        {
+            "id": 14,
+            "name": "payment",
+            "type": "select",
+            "title" : "Договор подписан  и оплачен",
+            "placeholder": "Номер договора",
+            "arr": [
+                
+                {
+                    "id": 1,
+                    "label": "Да",
+                    "value": "Yes"
+                },
+                {
+                    "id": 2,
+                    "label": "Нет",
+                    "value": "No"
+
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "name": "inn",
+            "type": "input",
+            "title" : "ИНН",
+            "placeholder": "Введите ИНН"
+        },
+        {
+            "id": 16,
+            "name": "ogrn",
+            "type": "input",
+            "title" : "ОГРН",
+            "placeholder": "Введите ОГРН"
+        }
+ 
+ 
+    ]
+}

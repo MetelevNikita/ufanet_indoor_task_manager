@@ -1,6 +1,18 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { FC, useState, useContext } from 'react'
+import { useRouter } from 'next/navigation'
+
+// context
+
+import { ModalSubmitActive } from './layout'
+
+
+
+// styles
+
+import styles from './page.module.css'
+
 
 // 
 
@@ -8,103 +20,52 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 // components
 
-import Button from '@/ui/Button/Button'
-
-// class
-
-import { FieldClassInput, FieldClassSelector, FieldClassFile } from '@/module/classField'
-
-// data
-
-import dataField from '@/json/dataField.json' with {type: 'json'}
+import MenuButton from '@/ui/MenuButton/MenuButton'
+import InfoTitle from '@/ui/InfoTitle/InfoTitle'
 
 
+// image
+
+
+import { FaTv } from "react-icons/fa6";
+import { MdOutlineMedicalServices } from "react-icons/md";
 
 
 
 const page: FC = () => {
 
-
-    const [data, setData] = useState<Record<string, any>>({})
-
+const router = useRouter()
 
   return (
     <Container>
-        <Row className='d-flex flex-column'>
 
-            {
+        <InfoTitle title={'Для кого будущий заказ?'} />
 
-                (dataField) && (
-                    dataField.data.map((item, index) => {
-                        
-                        if (item.type === 'input') {
-                            return new FieldClassInput(
-                                    item.id,
-                                    item.name,
-                                    item.placeholder,
-                                    item.title,
-                                    item.type
-                                ).createField(
-                                    data[item.name],
-                                    (e: any) => {
-                                        setData({...data, [item.name]: e.target.value})
-                                    })
-                        } else if (item.type === 'select') {
-                            return new FieldClassSelector(
-                                    item.id,
-                                    item.name,
-                                    item.title,
-                                    item.type
-                                ).createField(
-                                        data[item.name] ?? [],
-                                        (e: any) => {
-                                            setData({
-                                                    ...data,
-                                                    [item.name]:Array.from(new Set([
-                                                        ...(Array.isArray(data[item.name]) ? data[item.name] : []),
-                                                        e.target.value,
-                                                    ]))
-                                                }
-                                        )
-                                        },
-                                        item.arr
-                            
-                            )
-
-                        } else if (item.type === 'file') {
-                            return new FieldClassFile(item.id, item.name, item.title, item.placeholder, item.type).createField(
-                                    data[item.name],
-                                    (e: any) => {
-
-                                        const file = e.target.files[0]
-                                        if (!file) return
-
-                                        setData({...data, [item.name]: file})
-                                    }
-                                )
-                        } else if (item.type === 'area') {
-
-                        }
-
-
-                    })
-                )
-
-            }
-
-        </Row>
-
-
-
-        <Row className='mt-4'>
-            <Col>
-                <Button text={'Создать'} onClick={() => {}} />
+        <Row className={'d-flex justify-content-center align-items-center'}>
+            <Col md={4}>
+                <MenuButton
+                    title={'Умные экраны в ЖК'}
+                    subtitle={'Разместить QR code или рекламный ролик'}
+                    icon={<FaTv className={styles.menu_button_icon}/>}
+                    onClick={() => {
+                        router.push('/smartscreen')
+                    }}
+                />
             </Col>
 
-            <Col>
-                <Button text={'Очистить'} onClick={() => {}} />
+
+            <Col md={4}>
+                <MenuButton
+                    title={'Поликлиника ТВ'}
+                    subtitle={'Разместите рекламный ролик в поликлиниках вашего города'}
+                    icon={<MdOutlineMedicalServices className={styles.menu_button_icon}/>}
+                    onClick={() => {
+                        router.push('/clinic')
+                    }}
+                />
             </Col>
         </Row>
+
     </Container>
   )
 }
