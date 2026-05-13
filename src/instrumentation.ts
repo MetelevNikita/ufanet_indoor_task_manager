@@ -104,8 +104,6 @@ async function getYouGileApiKey () {
 async function createWebhookTelegram () {
     try {
         const agent = new SocksProxyAgent(`socks5://${process.env.PROXY_USER}:${process.env.PROXY_PASSWORD}@${process.env.PROXY_HOST}:${process.env.PROXY_PORT}`)
-        console.log('AGENT ', agent)
-
         console.log('# Зауск вебхука TELEGRAM')
 
         if (!process.env.WEBHOOK_URL || !process.env.TG_BOT_TOKEN) {
@@ -118,7 +116,7 @@ async function createWebhookTelegram () {
         }
 
         if (process.env.BOT_CREATED) return {
-            success: true,
+            success: false,
             message: 'Вебхук уже создан',
             data: process.env.BOT_CREATED
         }
@@ -342,8 +340,7 @@ async function startServices () {
         if (process.env.NEXT_RUNTIME === 'nodejs') {
 
         console.log('Запуск служб сервиса ufanet_indoor')
-        console.log(process.env.WEBHOOK_URL)
-
+ 
         const result = await Promise.all(
             [
                 await getYouGileApiKey(),
