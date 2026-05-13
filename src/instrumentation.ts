@@ -4,7 +4,11 @@ import TelegramBot from 'node-telegram-bot-api'
 
 import { postData } from "./functions/postData"
 import { getData } from './functions/getData'
-import { error } from 'console'
+
+// 
+
+import { SocksProxyAgent } from 'socks-proxy-agent'
+
 
 
 async function getYouGileApiKey () {
@@ -99,8 +103,10 @@ async function getYouGileApiKey () {
 
 async function createWebhookTelegram () {
     try {
+        const agent = new SocksProxyAgent(`socks5://${process.env.PROXY_USER}:${process.env.PROXY_PASSWORD}@${process.env.PROXY_HOST}:${process.env.PROXY_PORT}`)
+        console.log('AGENT ', agent)
 
-        console.log('# Зауск вебхука YouGile')
+        console.log('# Зауск вебхука TELEGRAM')
 
         if (!process.env.WEBHOOK_URL || !process.env.TG_BOT_TOKEN) {
             console.log('Нет входных параметров')
@@ -117,7 +123,13 @@ async function createWebhookTelegram () {
             data: process.env.BOT_CREATED
         }
 
-        const bot = new TelegramBot(process.env.TG_BOT_TOKEN as string)
+        const bot = new TelegramBot(process.env.TG_BOT_TOKEN as string, {
+            polling: true,
+            request: {
+                agent
+            } as any
+        })
+
         const resultBot = await bot.setWebHook(`${process.env.WEBHOOK_URL}/api/webhook/telegram` as string)
         const registredBot = await bot.getMe()
 
@@ -330,6 +342,7 @@ async function startServices () {
         if (process.env.NEXT_RUNTIME === 'nodejs') {
 
         console.log('Запуск служб сервиса ufanet_indoor')
+        console.log(process.env.WEBHOOK_URL)
 
         const result = await Promise.all(
             [
