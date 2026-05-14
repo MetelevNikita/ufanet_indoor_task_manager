@@ -125,7 +125,7 @@ async function createWebhookTelegram () {
         }
 
         const bot = new TelegramBot(process.env.TG_BOT_TOKEN as string, {
-            polling: true,
+            polling: false,
             request: {
                 agent
             } as any
