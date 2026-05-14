@@ -38,7 +38,7 @@ export async function saveFile (base64: string, endpoint: string): Promise<any> 
         const fileBuffer = Buffer.from(base64String, 'base64')
         fs.writeFileSync(path.resolve(endFolder, `image_${folderId}.${base64Type}`), fileBuffer)
         console.log('Файл успешно загружен')
-        return `/api/uploads/${endpoint}/${folderId}/image_${folderId}.${base64Type}`
+        return `${process.env.WEBHOOK_URL}/api/uploads/${endpoint}/${folderId}/image_${folderId}.${base64Type}`
 
         
     } catch (error) {

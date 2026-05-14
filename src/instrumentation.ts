@@ -103,7 +103,10 @@ async function getYouGileApiKey () {
 
 async function createWebhookTelegram () {
     try {
-        const agent = new SocksProxyAgent(`socks5://${process.env.PROXY_USER}:${process.env.PROXY_PASSWORD}@${process.env.PROXY_HOST}:${process.env.PROXY_PORT}`)
+        const agent = new SocksProxyAgent(`socks5://${process.env.PROXY_USER}:${process.env.PROXY_PASSWORD}@${process.env.PROXY_HOST}:${process.env.PROXY_PORT}`, {
+            keepAlive: false,
+            timeout: 30000
+        })
         console.log('# Зауск вебхука TELEGRAM')
 
         if (!process.env.WEBHOOK_URL || !process.env.TG_BOT_TOKEN) {

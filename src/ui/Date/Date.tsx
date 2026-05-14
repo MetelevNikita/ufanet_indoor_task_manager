@@ -18,8 +18,6 @@ const DateInput: FC<DateProps> = ({ title, value, placeholder, onChange }) => {
   const minDay = new Date().setDate(new Date().getDate()+1)
   const min = new Date(minDay).toISOString().split('T')[0]
 
-
-
   return (
     <div className={styles.date_container}>
         <span className={styles.date_title}>{title}</span>

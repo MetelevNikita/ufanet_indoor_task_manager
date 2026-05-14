@@ -216,15 +216,12 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
         const resultTGMessage = await bot.sendMessage(process.env.TG_ID_GROUP as string, messageTelegram, {parse_mode: 'HTML'})
         console.log(resultTGMessage)
 
-
         return NextResponse.json({
             success: true,
             message: 'Сообщение создано',
             data: 'Заявка успешно создана'
         })
-
-
-        
+  
     } catch (error: Error | unknown) {
         if (error instanceof Error) {
             console.error(error.message)
