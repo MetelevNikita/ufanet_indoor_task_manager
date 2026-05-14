@@ -41,7 +41,7 @@ const MenuButtonsBlock: FC<MenuButtonsBlockProps> = ({ data, category }) => {
             (
                 data.map((item: {id: number, title: string, subtitle: string, endpoint: string}, index: number): React.ReactNode => {
                     return (
-                        <Col md={4} key={index}>
+                        <Col md={4} key={index} className='d-flex justify-content-center mt-2 mb-2'>
                             <MenuButton title={item.title} subtitle={item.subtitle} icon={''} onClick={() => {
                                 router.push(`/${category}/${item.endpoint}`)
                             }} />

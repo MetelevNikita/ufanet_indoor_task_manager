@@ -26,9 +26,11 @@ const page: FC = () => {
   const router = useRouter()
 
   return (
-    <Container>
+    <Container className="mt-4">
       <Row className={"d-flex justify-content-between align-items-center"} style={{ height: "80px" }}>
-        <Col md={6} xs={12}>
+
+
+        <Col md={6} xs={12} className="d-flex justify-content-md-start justify-content-center mb-2">
           <motion.div
             className={styles.logo_wrapper}
             style={{ transformOrigin: 'bottom right' }}
@@ -65,9 +67,9 @@ const page: FC = () => {
           </div>
         </Col> */}
 
-        <Col md={4} className="d-flex justify-content-md-end">
+        <Col md={4} className="d-flex justify-content-md-end justify-content-center mb-2">
 
-            <Link href={'https://t.me/NikitaMetelev'} className={styles.contact_wrapper}>
+            <Link href={'https://t.me/NikitaMetelev'} className="d-flex justify-content-md-end justify-content-center">
                   <div className={styles.contact_title}>Что-то не работает? Пишите.</div>
                   <FaTelegramPlane className={styles.contact_icon}/>
             </Link>

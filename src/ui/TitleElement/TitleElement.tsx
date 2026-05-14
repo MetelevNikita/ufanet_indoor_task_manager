@@ -28,8 +28,8 @@ const TitleElement: FC<TitleElementProps> = ({ subtitle }) => {
     const router = useRouter()
 
   return (
-        <Row className='d-flex justify-content-center align-items-center mt-3'>
-            <Col md={5} className={'d-flex justify-content-end align-items-center'}>
+        <Row className='d-flex justify-content-center align-items-center'>
+            <Col md={5} className={'d-flex justify-content-md-end justify-content-center align-items-center mt-3 mb-3'}>
                 <motion.div
                     style={{ transformOrigin: 'bottom right' }}
                     className={styles.title}
@@ -49,7 +49,7 @@ const TitleElement: FC<TitleElementProps> = ({ subtitle }) => {
                 </motion.div>
             </Col>
 
-            <Col md={4}>
+            <Col md={4} className='mt-3 mb-3 text-md-start text-center'>
                 <motion.div className={styles.subtitle}>{subtitle}</motion.div>
             </Col>
         </Row>

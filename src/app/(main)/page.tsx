@@ -42,7 +42,7 @@ const router = useRouter()
         <InfoTitle title={'Для кого будущий заказ?'} />
 
         <Row className={'d-flex justify-content-center align-items-center'}>
-            <Col md={4}>
+            <Col md={4} className='d-flex justify-content-center mt-2 mb-2'>
                 <MenuButton
                     title={'Умные экраны в ЖК'}
                     subtitle={'Разместить QR code или рекламный ролик'}
@@ -54,7 +54,7 @@ const router = useRouter()
             </Col>
 
 
-            <Col md={4}>
+            <Col md={4} className='d-flex justify-content-center mt-2 mb-2'>
                 <MenuButton
                     title={'Поликлиника ТВ'}
                     subtitle={'Разместите рекламный ролик в поликлиниках вашего города'}

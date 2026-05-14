@@ -29,16 +29,14 @@ const FAQ: FC = () => {
         <Row className={[styles.faq_container, 'd-flex justify-content-center align-items-center mb-4'].join(' ')}>
 
 
-                    <Col md={3} className='d-flex justify-content-center align-items-center'>
+                    <Col md={3} className='d-flex justify-content-center align-items-center mt-2 mb-2'>
                         <div>
                             <Image className={styles.faq_image} src={qrcode} alt={'img'} width={400}/>
                         </div>
                     </Col>
 
-                    <Col md={6} className='d-flex justify-content-center align-items-center'>
-                        <div className={styles.faq_wrapper}>
+                    <Col md={6} className='d-flex justify-content-center align-items-center text-md-start text-center mt-2 mb-2'>
                             <div className={styles.faq_text}>Внимание! для того что бы получать уведомления о статусе вашей заявке вам необходиом подписаться на бота для рассылке <a href="https://t.me/ufanet_indoor_bot" target='_blank'>@ufanet_indoor_bot</a></div>
-                        </div>
                     </Col>
 
         </Row>

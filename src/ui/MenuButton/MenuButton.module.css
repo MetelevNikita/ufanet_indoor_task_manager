@@ -19,12 +19,15 @@
 
 /*  */
 
-.menu_button_top_wrapper {}
+.menu_button_top_wrapper {
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
 .menu_button_title {
     width: 280px;
     color: inherit;
-    font-size: 30px;
+    font-size: clamp(24px, 2vw, 30px);
     font-style: normal;
     font-weight: 500;
     line-height: normal;
