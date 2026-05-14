@@ -50,14 +50,22 @@ export const POST = async (req: NextRequest) => {
 
             if (JSON.stringify(data.payload.columnId) === JSON.stringify(data.prevData.columnId)) {
             console.log('Карточка осталась на текущей доске')
-            return null
+            return NextResponse.json({
+                success: true,
+                message: 'Карточка осталась на текущей доске',
+                data: null
+            })
             } else {
 
             const newColumn = await getYGColumns(data.payload.columnId, key, url)
 
-            if (newColumn.data.title === 'Входящие' || newColumn.data.title === 'Согласовано' || newColumn.data.title === 'Отклонено') {
+            if (newColumn.data.title === 'Входящие заявки с сайта ufanet.zakaz') {
             console.log('Данная колонка попадает в исключение')
-            return null
+            return NextResponse.json({
+                success: true,
+                message: 'Данная колонка попадает в исключение',
+                data: null
+            })
             }
 
             if (!newColumn.data) return newColumn.message
@@ -91,7 +99,11 @@ export const POST = async (req: NextRequest) => {
 
             if (JSON.stringify(prevUser) === JSON.stringify(payloadUser)) {
                 console.log('Данные о пользователях не изменились')
-                return null
+                return NextResponse.json({
+                    success: true,
+                    message: 'Данные о пользователях не изменились',
+                    data: null
+                })
             } else {
             const newUser = await getYGUsers(payloadUser, key, url)
 
@@ -126,11 +138,13 @@ export const POST = async (req: NextRequest) => {
 
             if (JSON.stringify(prevSticker) === JSON.stringify(payloadSticker)) {
                 console.log('Данные стикеров не изменились')
-                return null
+                return NextResponse.json({
+                    success: true,
+                    message: 'Данные стикеров не изменились',
+                    data: null
+                })
         } else {
             const sticker = await getYGStickerSprint(payloadSticker, key, url)
-            console.log(sticker)
-
             if (!sticker.data) return sticker.message
 
             const messageFromSticeker = sticker.data.map(async (item: {steickerName: string, currentState: {name: string, color: string}}): Promise<any> => {
