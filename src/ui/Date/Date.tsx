@@ -15,7 +15,7 @@ interface DateProps {
 
 const DateInput: FC<DateProps> = ({ title, value, placeholder, onChange }) => {
 
-  const minDay = new Date().setDate(new Date().getDate()+1)
+  const minDay = new Date().setDate(new Date().getDate()+5)
   const min = new Date(minDay).toISOString().split('T')[0]
 
   return (

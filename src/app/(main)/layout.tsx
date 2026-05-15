@@ -30,7 +30,7 @@ const Mainlayout = ({ children }: Readonly<{children: React.ReactNode}>) => {
 
             <main className="flex-grow-1 d-flex flex-column justify-content-center">
                 <FAQ />
-                <TitleElement title={'NAME WEB PAGE'} subtitle={'Сервис для создания заявок на разработку контента для умных экранов вашкего города'} />
+                <TitleElement title={'NAME WEB PAGE'} subtitle={'Сервис для создания заявок на разработку контента для умных экранов вашего города'} />
                 {children}
             </main>
 

@@ -47,7 +47,6 @@ import ModalSubmit from '../ModalSubmit/ModalSubmit'
 
 import { SlCheck } from "react-icons/sl";
 import { SlClose } from "react-icons/sl";
-import { SlQuestion } from "react-icons/sl";
 
 
 
@@ -84,6 +83,8 @@ const Form: FC<FormProps> = ({endpoint}) => {
     const searchParams = useSearchParams()
     const type = searchParams.get('type')
 
+    console.log(type)
+
     if (!type) {
       return
     }
@@ -119,15 +120,24 @@ const Form: FC<FormProps> = ({endpoint}) => {
     useEffect(() => {
 
       switch (type) {
-        case 'uk_text':
-            setTitle('Текстовое сообщение')
-          return
-        case 'uk_qrcode':
-            setTitle('Размещение QrCode')
-          return
-        case 'uk_video':
-            setTitle('Видеоролик')
-          return
+          case 'uk_text':
+              setTitle('Текстовое сообщение')
+            return
+          case 'uk_qrcode':
+              setTitle('Размещение QrCode')
+            return
+          case 'uk_video':
+              setTitle('Видеоролик')
+            return
+          case 'doctor_video':
+              setTitle('Для Минздрава/Главврача')
+            return 
+          case 'medical_video':
+              setTitle('Для бизнеса')
+            return 
+          default:
+              setTitle('Заказ Уфанет')
+            return 
         }
         
 
@@ -157,6 +167,7 @@ const Form: FC<FormProps> = ({endpoint}) => {
                           }))
                           }}
                           error={errors[item.name]}
+                          typeInput={(item.name === 'ogrn' || item.name === 'inn') ? 'number' : (item.name === 'phone') ? 'tel' : 'text'}
                         /></Col>
               case 'area':
                 return <Col className='mt-1 mb-2' key={index}><Area
@@ -183,7 +194,7 @@ const Form: FC<FormProps> = ({endpoint}) => {
                           arr={item.arr}
                           value={dataForm[item.name]?.data || []}
                           onChange={(e: any) => {
-                            setDataForm({...dataForm, [item.name]: {fieldName: item.title, data: [...(dataForm[item.name]?.data || []), e.target.value]}})
+                           (item.multi) ? setDataForm({...dataForm, [item.name]: {fieldName: item.title, data: [...(dataForm[item.name]?.data || []), e.target.value]}}) : setDataForm({...dataForm, [item.name]: {fieldName: item.title, data: [e.target.value]}})
                           }}
                           data={dataForm[item.name]?.data}
                           state={{dataForm, setDataForm}}

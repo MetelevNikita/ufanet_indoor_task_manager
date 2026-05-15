@@ -19,7 +19,8 @@
             "name": "phone",
             "type": "input",
             "title" : "Ваш телефон",
-            "placeholder": "8 (000) 00-00-000"
+            "placeholder": "8 (000) 00-00-000",
+            "typeInput": "tel"
         },
         {
             "id": 5,
@@ -67,7 +68,8 @@
                     "value": "city"
 
                 }
-            ]
+            ],
+            "multi": false
         },
         {
             "id": 10,
@@ -108,18 +110,19 @@
                     "label": "Любой житель",
                     "value": "any people"
                 }
-            ]
+            ],
+            "multi": false
         },
         {
             "id": 12,
             "name": "benefit",
             "type": "area",
-            "title" : "Главная Выгода ролика (1 предложение) Что человек должен понять за 10 секунд?",
+            "title" : "Главная выгода баннера (1 предложение)?",
             "placeholder": "Пример: * «Кофе в 1 минуте от подъезда», * «Распродажа  на ассортимент», * «Ремонт телефона за 15 минут »"
         },
         {
             "id": 13,
-            "name": "benefit",
+            "name": "benefit_dop",
             "type": "input",
             "title" : "Будем ли дополнять Главную выгоду – акцией, промокодом, скидкой, спецпредложением?",
             "placeholder": "Пример: «Скидка 20% до конца месяца», «Первое занятие бесплатно»"
@@ -128,8 +131,8 @@
             "id": 14,
             "name": "result",
             "type": "select",
-            "title" : "Что человек должен сделать Житель после просмотра ролика?",
-            "placeholder": "",
+            "title" : "Какое действие должен совершить человек после просмотра ролика",
+            "placeholder": "Введите текст",
             "arr": [
                 {
                     "id": 1,
@@ -157,7 +160,8 @@
                     "value": "remember brand"
                 }
     
-            ]
+            ],
+            "multi": true
         },
         {
             "id": 15,
@@ -192,21 +196,24 @@
                     "value": "No"
 
                 }
-            ]
+            ],
+            "multi": false
         },
         {
             "id": 18,
             "name": "inn",
             "type": "input",
             "title" : "ИНН",
-            "placeholder": "Введите ИНН"
+            "placeholder": "Введите ИНН",
+            "typeInput": "number"
         },
         {
             "id": 19,
             "name": "ogrn",
             "type": "input",
             "title" : "ОГРН",
-            "placeholder": "Введите ОГРН"
+            "placeholder": "Введите ОГРН",
+            "typeInput": "number"
         }
 
     ]

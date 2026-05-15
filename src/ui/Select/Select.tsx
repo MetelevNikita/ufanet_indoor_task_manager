@@ -67,7 +67,7 @@ const Select: FC<SelectProps> = ({ title, arr, value, onChange, data, state, nam
                             (e) => {
                                 setDataForm({...dataForm, ['other']: {fieldName: `${fieldValue.fieldName} (Другое)`, data: e.target.value}})
                             }
-                        } error={[]}/>
+                        }/>
                     )
 
                 }

@@ -19,7 +19,8 @@
             "name": "phone",
             "type": "input",
             "title" : "Ваш телефон",
-            "placeholder": "8 (000) 00-00-000"
+            "placeholder": "8 (000) 00-00-000",
+            "typeInput": "tel"
         },
         {
             "id": 4,
@@ -81,7 +82,8 @@
                     "value": "city"
 
                 }
-            ]
+            ],
+            "multi": false
         },
         {
             "id": 11,
@@ -122,7 +124,8 @@
                     "label": "Любой житель",
                     "value": "any people"
                 }
-            ]
+            ],
+            "multi": false
         },
         {
             "id": 13,
@@ -176,7 +179,8 @@
                     "value": "other"
                 }
     
-            ]
+            ],
+            "multi": true
         },
         {
             "id": 16,
@@ -211,21 +215,24 @@
                     "value": "No"
 
                 }
-            ]
+            ],
+            "multi": false
         },
         {
             "id": 19,
             "name": "inn",
             "type": "input",
             "title" : "ИНН",
-            "placeholder": "Введите ИНН"
+            "placeholder": "Введите ИНН",
+            "typeInput": "number"
         },
         {
             "id": 20,
             "name": "ogrn",
             "type": "input",
             "title" : "ОГРН",
-            "placeholder": "Введите ОГРН"
+            "placeholder": "Введите ОГРН",
+            "typeInput": "number"
         }
  
  

@@ -13,7 +13,8 @@
             "name": "phone",
             "type": "input",
             "title" : "Ваш телефон",
-            "placeholder": "8 (000) 00-00-000"
+            "placeholder": "8 (000) 00-00-000",
+            "typeInput": "tel"
         },
         {
             "id": 4,

@@ -36,7 +36,7 @@ const FAQ: FC = () => {
                     </Col>
 
                     <Col md={6} className='d-flex justify-content-center align-items-center text-md-start text-center mt-2 mb-2'>
-                            <div className={styles.faq_text}>Внимание! для того что бы получать уведомления о статусе вашей заявке вам необходиом подписаться на бота для рассылке <a href="https://t.me/ufanet_indoor_bot" target='_blank'>@ufanet_indoor_bot</a></div>
+                            <div className={styles.faq_text}>Внимание! Для того чтобы получать уведомления о статусе вашей заявки, вам необходимо подписаться на бота для рассылки. <a href="https://t.me/ufanet_indoor_bot" target='_blank'>@ufanet_indoor_bot</a></div>
                     </Col>
 
         </Row>

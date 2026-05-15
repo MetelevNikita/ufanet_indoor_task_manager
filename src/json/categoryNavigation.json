@@ -4,7 +4,7 @@
         "type": "smartscreen",
         "direction": "uk",
         "title": "Для управляющей компании",
-        "subtitle": "Текстовые объявления, QR-код или ролики" ,
+        "subtitle": "Текстовые объявления, QR-код или ролик" ,
         "endpoint": "uk"
 
     },

@@ -12,15 +12,17 @@ interface InputProps {
     placeholder: string
     onChange: (e: any) => any
     error?: boolean
+    typeInput?: string
 }
 
-const Input: FC<InputProps> = ({ title, value, placeholder, onChange, error }) => {
-
+const Input: FC<InputProps> = ({ title, value, placeholder, onChange, error, typeInput }) => {
 
   return (
     <div className={styles.input_container}>
         <span className={styles.input_title}>{title}</span>
         <input
+          type={(!typeInput) ? 'text' : typeInput}
+          autoComplete={(typeInput === 'tel') ? typeInput : undefined }
           style={(error) ? {borderColor: 'red'} : {borderColor: '#E9E9E9'}}
           placeholder={placeholder}
           className={styles.input}

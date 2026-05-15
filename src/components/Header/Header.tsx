@@ -1,9 +1,14 @@
 'use client'
 
-import { FC } from "react";
+import { FC, useContext } from "react";
 import Link from "next/link";
 import { motion } from 'motion/react'
 import { useRouter } from "next/navigation";
+
+// context
+
+import { TitleContext } from "@/app/(main)/layout";
+
 
 // icon
 
@@ -22,6 +27,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import headerMenuJson from "@/json/headerMenu.json" with { type: "json" };
 
 const page: FC = () => {
+
+  const { title, setTitle } = useContext(TitleContext) as {title: string, setTitle: any}
 
   const router = useRouter()
 
@@ -42,6 +49,7 @@ const page: FC = () => {
                 
             }}
             onClick={() => {
+              setTitle(null)
               router.push('/')
             }}
           >

@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useState, useContext } from 'react'
+import { FC } from 'react'
 import { useRouter } from 'next/navigation'
 
 // context
@@ -57,7 +57,7 @@ const router = useRouter()
             <Col md={4} className='d-flex justify-content-center mt-2 mb-2'>
                 <MenuButton
                     title={'Поликлиника ТВ'}
-                    subtitle={'Разместите рекламный ролик в поликлиниках вашего города'}
+                    subtitle={'Разместить рекламный ролик в поликлиниках вашего города'}
                     icon={<MdOutlineMedicalServices className={styles.menu_button_icon}/>}
                     onClick={() => {
                         router.push('/clinic')

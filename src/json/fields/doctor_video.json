@@ -5,7 +5,7 @@
             "name": "selfVideo",
             "type": "select",
             "title" : "Есть ли которвый ролик?",
-            "placeholder": "имя",
+            "placeholder": "Да/Нет",
             "arr": [
                 {
                     "Id": 1,
@@ -18,7 +18,8 @@
                     "value": "No"
 
                 }
-            ]
+            ],
+            "multi": false
         },
         
         {
@@ -40,7 +41,8 @@
             "name": "phone",
             "type": "input",
             "title" : "Ваш телефон",
-            "placeholder": "8 (000) 00-00-000"
+            "placeholder": "8 (000) 00-00-000",
+            "typeInput": "tel"
         },
         {
             "id": 5,
@@ -139,21 +141,24 @@
                     "value": "No"
 
                 }
-            ]
+            ],
+            "multi": false
         },
         {
             "id": 18,
             "name": "inn",
             "type": "input",
             "title" : "ИНН",
-            "placeholder": "Введите ИНН"
+            "placeholder": "Введите ИНН",
+            "typeInput": "number"
         },
         {
             "id": 19,
             "name": "ogrn",
             "type": "input",
             "title" : "ОГРН",
-            "placeholder": "Введите ОГРН"
+            "placeholder": "Введите ОГРН",
+            "typeInput": "number"
         }
  
  

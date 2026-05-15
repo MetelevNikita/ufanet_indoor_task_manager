@@ -1,8 +1,4 @@
 
-import { FC } from 'react'
-
-
-
 // bootstrap
 
 import { Container, Row } from 'react-bootstrap'
@@ -20,11 +16,9 @@ const page = async ({ params }: { params: {direction: string} }) => {
 
 const { direction } = await params
 
+console.log('DIRECTIONS ', direction)
+
 const currentDirections = directionMenuJson.filter((item) => item.type === direction) || []
-
-console.log(currentDirections)
-
-
 
   return (
     <Container>
