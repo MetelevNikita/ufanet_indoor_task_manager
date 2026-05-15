@@ -76,7 +76,7 @@
             "id": 11,
             "name": "logotype",
             "type": "file",
-            "title" : "Логотип (необязательно)",
+            "title" : "Логотип (не обязательно)",
             "placeholder": ""
         },
         {
@@ -84,7 +84,7 @@
             "name": "organization",
             "type": "input",
             "title" : "Наименование  организации/бренда",
-            "placeholder": "ООО Комания"
+            "placeholder": "ООО Компания"
         },
         {
             "id": 13,

@@ -168,7 +168,7 @@
             "name": "organization",
             "type": "input",
             "title" : "Наименование  организации/бренда",
-            "placeholder": "ООО Комания"
+            "placeholder": "ООО Компания"
         },
         {
             "id": 16,

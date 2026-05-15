@@ -28,7 +28,7 @@
             "name": "kontragent",
             "type": "input",
             "title" : "Наименование контрагента",
-            "placeholder": "ООО Фирма"
+            "placeholder": "ООО Компания"
         },
 
         {
