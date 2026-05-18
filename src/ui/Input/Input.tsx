@@ -84,11 +84,26 @@ const Input: FC<InputProps> = ({ title, value, placeholder, onChange, error, nam
     }
 
 
+    function typesInput (type: string) {
+
+      switch (type) {
+        case 'phone':
+          return 'tel'
+        case 'inn':
+          return 'number'
+        case 'ogrn':
+          return 'number'
+        default:
+          return 'text'
+      }
+    }
+
+
   return (
     <div className={styles.input_container}>
         <span className={styles.input_title}>{title}</span>
         <input
-          type={(name === 'phone') ? 'tel' : 'text'}
+          type={typesInput(name as string)}
           autoComplete={(name === 'phone') ? 'tel' : undefined }
           style={(error) ? {borderColor: 'red'} : {borderColor: '#E9E9E9'}}
           placeholder={placeholder}
