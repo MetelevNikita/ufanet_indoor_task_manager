@@ -11,7 +11,7 @@
             "id": 2,
             "name": "city",
             "type": "input",
-            "title" : "Ваше город",
+            "title" : "Ваш город",
             "placeholder": "город"
         },
         {

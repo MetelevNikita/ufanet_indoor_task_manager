@@ -83,8 +83,6 @@ const Form: FC<FormProps> = ({endpoint}) => {
     const searchParams = useSearchParams()
     const type = searchParams.get('type')
 
-    console.log(type)
-
     if (!type) {
       return
     }
@@ -167,7 +165,7 @@ const Form: FC<FormProps> = ({endpoint}) => {
                           }))
                           }}
                           error={errors[item.name]}
-                          typeInput={(item.name === 'ogrn' || item.name === 'inn') ? 'number' : (item.name === 'phone') ? 'tel' : 'text'}
+                          name={item.name}
                         /></Col>
               case 'area':
                 return <Col className='mt-1 mb-2' key={index}><Area
@@ -207,6 +205,15 @@ const Form: FC<FormProps> = ({endpoint}) => {
                           value={dataForm[item.name]?.data || ''}
                           placeholder={item.placeholder}
                           onChange={(e: any) => {
+
+                              const minDate = new Date().getDate()+3
+                              const valueDate = new Date(e.target.value).getDate()
+          
+                              if (valueDate < minDate) {
+                                alert('Нельзя выбрать начальную дату размещения ранее, чем на 3 рабочих дня от текущей')
+                                return
+                              }
+
                               setDataForm({...dataForm, [item.name]: {fieldName: item.title, data: e.target.value}})
                           }}
                         /></Col>

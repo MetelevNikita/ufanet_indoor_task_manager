@@ -33,7 +33,7 @@
             "id": 3,
             "name": "city",
             "type": "input",
-            "title" : "Ваше город",
+            "title" : "Ваш город",
             "placeholder": "город"
         },
         {
