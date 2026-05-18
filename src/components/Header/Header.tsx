@@ -77,7 +77,7 @@ const page: FC = () => {
 
         <Col md={4} className="d-flex justify-content-md-end justify-content-center mb-2">
 
-            <Link href={'https://t.me/NikitaMetelev'} className="d-flex justify-content-md-end justify-content-center">
+            <Link target="_blank" href={'https://t.me/MetelevNikita'} className="d-flex justify-content-md-end justify-content-center">
                   <div className={styles.contact_title}>Что-то не работает? Пишите.</div>
                   <FaTelegramPlane className={styles.contact_icon}/>
             </Link>

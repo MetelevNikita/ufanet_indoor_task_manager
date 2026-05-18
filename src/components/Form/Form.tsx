@@ -166,6 +166,7 @@ const Form: FC<FormProps> = ({endpoint}) => {
                           }}
                           error={errors[item.name]}
                           name={item.name}
+                          subtitle={item.subtitle}
                         /></Col>
               case 'area':
                 return <Col className='mt-1 mb-2' key={index}><Area

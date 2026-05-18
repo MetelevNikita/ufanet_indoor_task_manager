@@ -7,13 +7,39 @@ import { getYGColumns } from "@/functions/yougileFnWebhook/getYGColumn";
 import { getYGStickerSprint } from "@/functions/yougileFnWebhook/getYGStiackerSprint";
 import { getYGUsers } from "@/functions/yougileFnWebhook/getYGUsers";
 
+
+function findId (text: string) {
+
+    const regExp = /Ваш\s*телеграм\s*id\s*\(для\s*связи\):\s*(\d+)/i
+
+    const findId = text.match(regExp)
+    console.log(findId)
+    return findId
+}
+
+
+
 export const POST = async (req: NextRequest) => {
     try {
 
 
         const bot = await telegramBot()
-
         const data = await req.json()
+
+        const id = findId(data.payload.title) ?? []
+
+        if (id.length < 1) {
+            console.log('Данный тип заявки не проходил через сайт zakaz.ufanet.ru')
+            return NextResponse.json({
+                success: false,
+                message: 'Данный тип заявки не проходил через сайт zakaz.ufanet.ru',
+                data: null
+            })
+        }
+
+        console.log('ID ', id[1])
+        
+
 
         // 
         const key = process.env.YG_API_KEY as string
@@ -26,11 +52,24 @@ export const POST = async (req: NextRequest) => {
             const columnTask = await getYGColumns(data.payload.columnId, key, url)
 
             console.log(`Карточка ${data.payload.title} создана и перемещена в колонку ${columnTask.data.title as string}`)
-            message = `Карточка ${data.payload.title} создана и перемещена в колонку ${columnTask.data.title as string}`
+            message = `Новая заявка \n\n\n ${data.payload.title} \n\n\n\n\n\n\n Колонка "${columnTask.data.title as string}"`
 
-            //  Отправка пользователю 
+            //  Отправка пользователю
+
+            try {
+                const messageAuthor = await bot.sendMessage(id[1], message)
+                console.log(`Сообщение отправлено пользователю c id ${id[1]}`)
+            } catch (error: Error | any) {
+                if (error.response?.statusCode === 403) {
+                    console.log('Пользователь не начал диалог с ботом или заблокировал его');
+                } else {
+                    console.log(error.message);
+                }
+            }
 
 
+            const messageGroup = await bot.sendMessage('-5141005635', message)
+            console.log(messageGroup)
 
             // 
 
@@ -71,11 +110,23 @@ export const POST = async (req: NextRequest) => {
             if (!newColumn.data) return newColumn.message
 
             console.log(`Карточка ${data.payload.title} перемещена - новая доска ${newColumn.data.title as string}`)
-            message = `Карточка ${data.payload.title} перемещена - новая доска ${newColumn.data.title as string}`
+            message = `Карточка ${data.payload.title} \n\n\n\n\n\n\n Перемещена в "${newColumn.data.title as string}"`
 
-            //  Отправка пользователю 
+            //  Отправка пользователю
 
-            await bot.sendMessage('-5141005635', message)
+            try {
+                const messageAuthor = await bot.sendMessage(id[1], message)
+                console.log(`Сообщение отправлено пользователю c id ${id[1]}`)
+            } catch (error: Error | any) {
+                if (error.response?.statusCode === 403) {
+                    console.log('Пользователь не начал диалог с ботом или заблокировал его');
+                } else {
+                    console.log(error.message);
+                }
+            }
+
+            const messageGroup = await bot.sendMessage('-5141005635', message)
+            console.log(messageGroup)
 
             // 
 
@@ -114,7 +165,19 @@ export const POST = async (req: NextRequest) => {
 
             //  Отправка пользователю 
 
-              await bot.sendMessage('-5141005635', message)
+            
+                try {
+                    const messageAuthor = await bot.sendMessage(id[1], message)
+                    console.log(`Сообщение отправлено пользователю c id ${id[1]}`)
+                } catch (error: Error | any) {
+                    if (error.response?.statusCode === 403) {
+                        console.log('Пользователь не начал диалог с ботом или заблокировал его');
+                    } else {
+                        console.log(error.message);
+                    }
+                }
+                const messageGroup = await bot.sendMessage('-5141005635', message)
+                console.log(messageGroup)
 
             // 
 
@@ -147,13 +210,24 @@ export const POST = async (req: NextRequest) => {
             const sticker = await getYGStickerSprint(payloadSticker, key, url)
             if (!sticker.data) return sticker.message
 
-            const messageFromSticeker = sticker.data.map(async (item: {steickerName: string, currentState: {name: string, color: string}}): Promise<any> => {
+            const messageFromSticeker = sticker.data.map((item: {steickerName: string, currentState: {name: string, color: string}}) => {
                 return `${item.steickerName} стикер изменен, новое состояние - ${item.currentState.name}`
-            })
+            }).join('\n');
 
-            //  Отправка пользователю 
+            //  Отправка пользователю
 
-            await bot.sendMessage('-5141005635', messageFromSticeker)
+            try {
+                const messageAuthor = await bot.sendMessage(id[1], messageFromSticeker)
+                console.log(`Сообщение отправлено пользователю c id ${id[1]}`)
+            } catch (error: Error | any) {
+                if (error.response?.statusCode === 403) {
+                    console.log('Пользователь не начал диалог с ботом или заблокировал его');
+                } else {
+                    console.log(error.message);
+                }
+            }
+
+            const messageGroup = await bot.sendMessage('-5141005635', messageFromSticeker)
 
             // 
 

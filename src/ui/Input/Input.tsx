@@ -1,8 +1,10 @@
 import { FC } from 'react'
+import Link from 'next/link'
 
 // styles
 
 import styles from './Input.module.css'
+import { div } from 'motion/react-client'
 
 // 
 
@@ -13,9 +15,20 @@ interface InputProps {
     onChange: (e: any) => any
     error?: boolean
     name?: string
+    subtitle?: string
 }
 
-const Input: FC<InputProps> = ({ title, value, placeholder, onChange, error, name }) => {
+const Input: FC<InputProps> = ({ title, value, placeholder, onChange, error, name, subtitle }) => {
+
+
+
+    const subtitleData = subtitle?.split(' ')
+    const start = subtitleData?.slice(0, 8).join(' ')
+    const end = subtitleData?.slice(-1).join(' ').slice(1)
+
+
+    console.log(start)
+    console.log(end)
 
     function textGenerator (value: string | null, type: string) {
 
@@ -92,6 +105,17 @@ const Input: FC<InputProps> = ({ title, value, placeholder, onChange, error, nam
           required
 
         />
+
+        {
+          (subtitle) && (
+            <div className={styles.input_subtitle_container}>
+              <span className={styles.input_subtitle_text}>{start}</span>
+              <Link className={styles.input_subtitle_link} href={`https://t.me/${end}`}>@{end}</Link>
+            </div>
+          )
+        }
+
+
           
     </div>
   )

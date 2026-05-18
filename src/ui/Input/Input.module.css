@@ -39,3 +39,17 @@ input::placeholder {
 .input:required:invalid {
   border-color: #c00e0e;
 }
+
+
+/*  */
+
+.input_subtitle_container {
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.input_subtitle_text {}
+
+.input_subtitle_link {
+    margin-left: 3px;
+}

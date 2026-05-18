@@ -21,7 +21,8 @@
             "name": "tgid",
             "type": "input",
             "title" : "Ваш телеграм id (для связи)",
-            "placeholder": "@nickname"
+            "placeholder": "0000000",
+            "subtitle": "Узнать ваш Telegram ID можно с помощью бота @Getmyid_Work_Bot"
         },
         {
             "id": 4,

@@ -21,7 +21,7 @@ const DateInput: FC<DateProps> = ({ title, value, placeholder, onChange }) => {
   return (
     <div className={styles.date_container}>
         <span className={styles.date_title}>{title}</span>
-        <input type='date' placeholder={placeholder} className={styles.date} value={value} onChange={onChange}/>
+        <input min={min} type='date' placeholder={placeholder} className={styles.date} value={value} onChange={onChange}/>
     </div>
   )
 }
