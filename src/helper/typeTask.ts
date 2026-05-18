@@ -12,6 +12,7 @@ import businessPhotoJson from '@/json/fields/business_photo.json'
 // 
 
 import doctorVideoJson from '@/json/fields/doctor_video.json'
+import doctorSubtitleJson from '@/json/fields/doctor_subtitle.json'
 import medicalVideoJson from '@/json/fields/medical_video.json'
 
 
@@ -56,14 +57,20 @@ export function currentTypeTask (direction: string): {type: string, label: strin
         case 'doctor_video':
             return {
                         type: direction,
-                        label: "Поликлиника ТВ / Для Минздрава/Главврача",
-                        data: medicalVideoJson
+                        label: "Видео с нуля",
+                        data: doctorVideoJson
+                    }
+        case 'doctor_subtitle':
+            return {
+                        type: direction,
+                        label: "Субтитрирование готового ролика",
+                        data: doctorSubtitleJson
                     }
         case 'medical_video':
             return {
                         type: direction,
                         label: "Поликлиника ТВ / Для Бизнеса",
-                        data: doctorVideoJson
+                        data: medicalVideoJson
                     }
         default:
             return {

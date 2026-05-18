@@ -53,19 +53,11 @@
             "placeholder": "дата"
         },
         {
-            "id": 13,
-            "name": "description",
-            "type": "area",
-            "title" : "Описание",
-            "placeholder": "Опишите кратко суть того,  что вы хотите видеть в ролике"
-        },
-        {
-            "id": 14,
-            "name": "logotype",
-            "type": "file",
-            "title" : "Логотип (не обязательно)",
-            "placeholder": ""
+            "id": 8,
+            "name": "video_link",
+            "type": "input",
+            "title": "Ссылка на видео (ролик)",
+            "placeholder": "прикрепите ссылку на диск илии файлообменник"
         }
-
     ]
 }

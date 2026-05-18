@@ -23,7 +23,7 @@
         "direction": "doctor",
         "title": "Для Минздрава/Главврача",
         "subtitle": "Субтитрирование готовых роликов, видеоролики «с нуля»" ,
-        "endpoint": "form?direction=clinic&type=doctor_video"
+        "endpoint": "policlinic"
  
 
     },

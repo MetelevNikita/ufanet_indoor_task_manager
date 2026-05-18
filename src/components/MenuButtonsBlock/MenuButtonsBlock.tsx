@@ -23,8 +23,7 @@ interface MenuButtonsBlockProps {
 
 const MenuButtonsBlock: FC<MenuButtonsBlockProps> = ({ data, category }) => {
 
-    const router = useRouter()
-
+const router = useRouter()
 
   return (
     <Row className={'d-flex justify-content-center align-items-center mt-5'}>

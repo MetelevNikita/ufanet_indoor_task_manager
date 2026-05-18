@@ -16,8 +16,6 @@ const page = async ({ params }: { params: {direction: string} }) => {
 
 const { direction } = await params
 
-console.log('DIRECTIONS ', direction)
-
 const currentDirections = directionMenuJson.filter((item) => item.type === direction) || []
 
   return (

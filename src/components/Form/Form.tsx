@@ -100,10 +100,6 @@ const Form: FC<FormProps> = ({endpoint}) => {
 
           const value = dataForm[item.name]?.data
 
-
-          console.log(item.name)
-
-
           if ( value === undefined || value === null || value === '' || (Array.isArray(value) && value.length === 0)) {
             nextErrors[item.name] = true
           }
@@ -120,10 +116,10 @@ const Form: FC<FormProps> = ({endpoint}) => {
         return Object.keys(nextErrors).length === 0
     }
 
-    // 
+    //
+  
 
-    const currentDirectionForm = currentTypeTask(type) 
-
+    const currentDirectionForm = currentTypeTask(type)
 
     useEffect(() => {
 
@@ -328,8 +324,6 @@ const Form: FC<FormProps> = ({endpoint}) => {
     async function createTaskHandler (body: any): Promise<Error | { success: boolean; message: string; data: any } | any> {
       try {
 
-        console.log('FEONT START')
-
         const typeTask = currentTypeTask(type as string)
 
         let insertTypeFromBody = {
@@ -401,8 +395,6 @@ const Form: FC<FormProps> = ({endpoint}) => {
                     title={'Успешно'}
                     description={resultApi?.message as string ?? ''}
                     onClick={() => {
-
-                      console.log('click')
                       setModal(null)
                       setTitle('Заказ Уфанет')
                       router.push('/')
@@ -435,8 +427,6 @@ const Form: FC<FormProps> = ({endpoint}) => {
       <Row className='mb-5'>
         <Col>
           <Button text={'Создать'} onClick={() => {
-
-            console.log('start')
 
             if (!validateForm()) {
               alert('Проверьте что заполнены все поля')

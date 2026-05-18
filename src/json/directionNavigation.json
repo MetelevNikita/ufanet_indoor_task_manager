@@ -46,5 +46,22 @@
         "title": "Фотоотчет",
         "subtitle": "Подготовить фотоотчет" ,
         "endpoint": "form?direction=business&type=business_photo"
+    },
+
+    {
+        "id": 7,
+        "type": "policlinic",
+        "category": "policlinic",
+        "title": "Заказ ролика c нуля",
+        "subtitle": "Производство нового ролика" ,
+        "endpoint": "form?direction=policlinic&type=doctor_video"
+    },
+    {
+        "id": 8,
+        "type": "policlinic",
+        "category": "policlinic",
+        "title": "Субтитрирование готового ролика",
+        "subtitle": "Подготовка и монтаж субтитров" ,
+        "endpoint": "form?direction=policlinic&type=doctor_subtitle"
     }
 ]
