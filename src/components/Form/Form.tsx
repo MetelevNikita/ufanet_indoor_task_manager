@@ -217,12 +217,22 @@ const Form: FC<FormProps> = ({endpoint}) => {
                           placeholder={item.placeholder}
                           onChange={(e: any) => {
 
-                              const minDate = new Date().getDate()+3
-                              const valueDate = new Date(e.target.value).getDate()
-          
-                              if (valueDate < minDate) {
-                                alert('Нельзя выбрать начальную дату размещения ранее, чем на 3 рабочих дня от текущей')
+                              const value = e.target.value
+
+                              if (!value) {
                                 return
+                              }
+                              
+                              const minDate = new Date();
+                              minDate.setHours(0, 0, 0, 0);
+                              minDate.setDate(minDate.getDate() + 3);
+
+                              const valueDate = new Date(value);
+                              valueDate.setHours(0, 0, 0, 0);
+
+                              if (valueDate.getTime() < minDate.getTime()) {
+                                alert('Нельзя выбрать начальную дату размещения ранее, чем на 3 рабочих дня от текущей');
+                                return;
                               }
 
                               setDataForm({...dataForm, [item.name]: {fieldName: item.title, data: e.target.value}})
