@@ -92,19 +92,29 @@ const Form: FC<FormProps> = ({endpoint}) => {
 
     function validateForm() {
         const nextErrors: Record<string, boolean> = {}
+        
 
         currentDirectionForm.data.data.forEach((item: any) => {
+
+          if (item.name !== 'logotype') {
+
           const value = dataForm[item.name]?.data
 
-          if (
-            value === undefined ||
-            value === null ||
-            value === '' ||
-            (Array.isArray(value) && value.length === 0)
-          ) {
+
+          console.log(item.name)
+
+
+          if ( value === undefined || value === null || value === '' || (Array.isArray(value) && value.length === 0)) {
             nextErrors[item.name] = true
           }
+
+
+          }
+
         })
+
+
+
 
         setErrors(nextErrors)
         return Object.keys(nextErrors).length === 0
@@ -308,6 +318,8 @@ const Form: FC<FormProps> = ({endpoint}) => {
     async function createTaskHandler (body: any): Promise<Error | { success: boolean; message: string; data: any } | any> {
       try {
 
+        console.log('FEONT START')
+
         const typeTask = currentTypeTask(type as string)
 
         let insertTypeFromBody = {
@@ -413,7 +425,11 @@ const Form: FC<FormProps> = ({endpoint}) => {
       <Row className='mb-5'>
         <Col>
           <Button text={'Создать'} onClick={() => {
+
+            console.log('start')
+
             if (!validateForm()) {
+              alert('Проверьте что заполнены все поля')
               return
             }
             createTaskHandler(dataForm)

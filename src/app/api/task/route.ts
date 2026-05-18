@@ -102,6 +102,9 @@ async function getCurrentColumnId (url: string, key: number | string) {
 export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
     try {
 
+
+        console.log('START')
+
         const url = process.env.YG_BASE_URL as string
         const apiKey = process.env.YG_API_KEY as string
 

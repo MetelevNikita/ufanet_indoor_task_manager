@@ -26,10 +26,6 @@ const Input: FC<InputProps> = ({ title, value, placeholder, onChange, error, nam
     const start = subtitleData?.slice(0, 8).join(' ')
     const end = subtitleData?.slice(-1).join(' ').slice(1)
 
-
-    console.log(start)
-    console.log(end)
-
     function textGenerator (value: string | null, type: string) {
 
       if (!value) {
