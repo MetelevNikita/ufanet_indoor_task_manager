@@ -1,79 +1,59 @@
 {
     "data": [
         {
-            "id": 1,
+            "id": 2,
             "name": "fio",
             "type": "input",
-            "title" : "Ваше имя",
-            "placeholder": "имя"
-        },
-        {
-            "id": 2,
-            "name": "city",
-            "type": "input",
-            "title" : "Ваш город",
-            "placeholder": "город"
+            "title" : "Менеджер Уфанет",
+            "placeholder": "имя менеджера"
         },
         {
             "id": 3,
-            "name": "phone",
+            "name": "phone_manager",
             "type": "input",
-            "title" : "Ваш телефон",
+            "title" : "Телефон менеджера",
             "placeholder": "8 (000) 00-00-000",
             "typeInput": "tel"
+            
         },
         {
             "id": 4,
             "name": "tgid",
             "type": "input",
-            "title" : "Ваш телеграм id (для связи)",
+            "title" : "Телеграм id менеджера (для связи)",
             "placeholder": "0000000",
             "subtitle": "Узнать ваш Telegram ID можно с помощью бота @Getmyid_Work_Bot"
         },
         {
             "id": 5,
+            "name": "city",
+            "type": "input",
+            "title" : "Город размещения",
+            "placeholder": "город"
+        },
+        {
+            "id": 6,
             "name": "date_start",
             "type": "date",
             "title" : "Дата начала показа",
             "placeholder": "дата"
         },
         {
-            "id": 6,
+            "id": 7,
             "name": "date_end",
             "type": "date",
             "title" : "Дата окончания показа",
             "placeholder": "дата"
         },
         {
-            "id": 7,
-            "name": "duration",
-            "type": "input",
-            "title" : "Хронометраж видео",
-            "placeholder": "10 секунд"
-        },
-        {
-            "id": 8,
-            "name": "contacts",
-            "type": "area",
-            "title" : "Контактный блок",
-            "placeholder": "до 300 символов"
-        },
-        {
             "id": 9,
-            "name": "logotype",
-            "type": "file",
-            "title" : "Логотип (не обязательно)",
-            "placeholder": ""
-        },
-        {
-            "id": 10,
             "name": "typeClient",
             "type": "select",
             "title" : "Какой тип клиента? (выбрать один)",
             "placeholder": "",
             "arr": [
                 {
-                    "id": 1,
+                    "Id": 1,
                     "label": "Районный (ищет трафик в 1-м районе)",
                     "value": "district"
                 },
@@ -87,21 +67,21 @@
             "multi": false
         },
         {
-            "id": 11,
+            "id": 10,
             "name": "typeProduct",
             "type": "input",
             "title" : "Какой продукт / услуга рекламируем? (напишите)",
             "placeholder": "Укажите конкретный продукт, а не компанию в целом. Пример: «Доставка суши», «Стоматология у дома»"
         },
         {
-            "id": 12,
+            "id": 11,
             "name": "targetСlient",
             "type": "select",
             "title" : "Кто целевой клиент в этом ЖК? (выбрать один)",
             "placeholder": "",
             "arr": [
                 {
-                    "id": 1,
+                    "Id": 1,
                     "label": "Семьи с детьми",
                     "value": "family"
                 },
@@ -129,25 +109,25 @@
             "multi": false
         },
         {
-            "id": 13,
+            "id": 12,
             "name": "benefit",
             "type": "area",
-            "title" : "Главная Выгода ролика (1 предложение) Что человек должен понять за 10 секунд?",
+            "title" : "Главная выгода видеоролика (1 предложение)? Что челолвек должен понять за 10 секунд",
             "placeholder": "Пример: * «Кофе в 1 минуте от подъезда», * «Распродажа  на ассортимент», * «Ремонт телефона за 15 минут »"
         },
         {
-            "id": 14,
-            "name": "discounts",
+            "id": 13,
+            "name": "benefit_dop",
             "type": "input",
             "title" : "Будем ли дополнять Главную выгоду – акцией, промокодом, скидкой, спецпредложением?",
             "placeholder": "Пример: «Скидка 20% до конца месяца», «Первое занятие бесплатно»"
         },
         {
-            "id": 15,
+            "id": 14,
             "name": "result",
             "type": "select",
-            "title" : "Что человек должен сделать Житель после просмотра ролика?",
-            "placeholder": "",
+            "title" : "Какое действие должен совершить человек после просмотра видео",
+            "placeholder": "Введите текст",
             "arr": [
                 {
                     "id": 1,
@@ -173,32 +153,42 @@
                     "id": 5,
                     "label": "Просто запомнить бренд",
                     "value": "remember brand"
-                },
-                {
-                    "id": 6,
-                    "label": "Другое",
-                    "value": "other"
                 }
     
             ],
-            "multi": true
+            "multi": false
         },
         {
-            "id": 16,
+            "id": 15,
             "name": "organization",
             "type": "input",
             "title" : "Наименование  организации/бренда",
             "placeholder": "ООО Компания"
         },
         {
-            "id": 17,
+            "id": 15,
+            "name": "fio_client",
+            "type": "input",
+            "title" : "ФИО представителя компании",
+            "placeholder": "фио"
+        },
+        {
+            "id": 16,
+            "name": "phone_client",
+            "type": "input",
+            "title" : "Номер представителя компании",
+            "placeholder": "8(000)00-00-000",
+            "typeInput": "tel"
+        },
+        {
+            "id": 16,
             "name": "agreement",
             "type": "input",
             "title" : "Договор",
             "placeholder": "Номер договора"
         },
         {
-            "id": 18,
+            "id": 17,
             "name": "payment",
             "type": "select",
             "title" : "Договор подписан  и оплачен",
@@ -220,7 +210,7 @@
             "multi": false
         },
         {
-            "id": 19,
+            "id": 18,
             "name": "inn",
             "type": "input",
             "title" : "ИНН",
@@ -228,14 +218,13 @@
             "typeInput": "number"
         },
         {
-            "id": 20,
+            "id": 19,
             "name": "ogrn",
             "type": "input",
             "title" : "ОГРН",
             "placeholder": "Введите ОГРН",
             "typeInput": "number"
         }
- 
- 
+
     ]
 }

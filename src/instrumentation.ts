@@ -109,6 +109,9 @@ async function createWebhookTelegram () {
         })
         console.log('# Зауск вебхука TELEGRAM')
 
+
+        // console.log('AGENT', agent)
+
         if (!process.env.WEBHOOK_URL || !process.env.TG_BOT_TOKEN) {
             console.log('Нет входных параметров')
             return {
@@ -143,14 +146,6 @@ async function createWebhookTelegram () {
             }
         })
 
-        bot.on('polling_error', (error) => {
-            console.error('Polling error:', error.message)
-            return {
-                success: false,
-                message: `Polling error: ${error.message}`, 
-                data: null
-            }
-        })
 
         process.env.BOT_CREATED = 'true'
         return {

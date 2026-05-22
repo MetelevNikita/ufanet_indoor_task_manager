@@ -1,13 +1,12 @@
 {
     "data": [
         {
-            "id": 1,
-            "name": "fio",
+            "id": 3,
+            "name": "city",
             "type": "input",
-            "title" : "Ваше имя",
-            "placeholder": "Текст"
+            "title" : "Ваш город",
+            "placeholder": "город"
         },
-
         {
             "id": 2,
             "name": "name_clinic",
@@ -16,11 +15,11 @@
             "placeholder": "Название клиники"
         },
         {
-            "id": 3,
-            "name": "city",
+            "id": 1,
+            "name": "fio",
             "type": "input",
-            "title" : "Ваш город",
-            "placeholder": "город"
+            "title" : "Ваше имя",
+            "placeholder": "фио"
         },
         {
             "id": 4,

@@ -78,7 +78,7 @@
             "name": "duration",
             "type": "input",
             "title" : "Хронометраж видео",
-            "placeholder": "10 секунд"
+            "placeholder": "Введите хронометраж видео"
         },
         
         {

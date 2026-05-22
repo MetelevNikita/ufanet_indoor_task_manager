@@ -34,8 +34,8 @@ const Select: FC<SelectProps> = ({ title, arr, value, onChange, data, state, nam
         <div className={styles.select_container}>
 
             <span className={styles.select_title}>{title}</span>
-            <select className={styles.select_input} name={value} id={value} onChange={onChange}>
-                <option>{'выберите значение'}</option>
+            <select className={styles.select_input} name={value} id={value} onChange={onChange} defaultValue={""}>
+                <option disabled value={''}>{'выберите значение'}</option>
                 {
                     arr.map((opt, index) => {
                         return (

@@ -4,31 +4,31 @@
             "id": 2,
             "name": "fio",
             "type": "input",
-            "title" : "Ваше имя",
-            "placeholder": "имя"
+            "title" : "Менеджер Уфанет",
+            "placeholder": "имя менеджера"
         },
         {
             "id": 3,
-            "name": "city",
+            "name": "phone_meneger",
             "type": "input",
-            "title" : "Ваш город",
-            "placeholder": "город"
-        },
-        {
-            "id": 4,
-            "name": "phone",
-            "type": "input",
-            "title" : "Ваш телефон",
+            "title" : "Телефон менеджера",
             "placeholder": "8 (000) 00-00-000",
             "typeInput": "tel"
         },
         {
-            "id": 5,
+            "id": 4,
             "name": "tgid",
             "type": "input",
-            "title" : "Ваш телеграм id (для связи)",
+            "title" : "Телеграм id менеджера (для связи)",
             "placeholder": "0000000",
             "subtitle": "Узнать ваш Telegram ID можно с помощью бота @Getmyid_Work_Bot"
+        },
+        {
+            "id": 5,
+            "name": "city",
+            "type": "input",
+            "title" : "Город размещения",
+            "placeholder": "город"
         },
         {
             "id": 6,
@@ -170,6 +170,21 @@
             "type": "input",
             "title" : "Наименование  организации/бренда",
             "placeholder": "ООО Компания"
+        },
+        {
+            "id": 15,
+            "name": "fio_client",
+            "type": "input",
+            "title" : "ФИО представителя компании",
+            "placeholder": "фио"
+        },
+        {
+            "id": 16,
+            "name": "phone_doctor",
+            "type": "input",
+            "title" : "Номер представителя компании",
+            "placeholder": "8(000)00-00-000",
+            "typeInput": "tel"
         },
         {
             "id": 16,

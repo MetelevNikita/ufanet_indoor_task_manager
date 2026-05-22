@@ -22,93 +22,95 @@ const Input: FC<InputProps> = ({ title, value, placeholder, onChange, error, nam
 
 
 
-    const subtitleData = subtitle?.split(' ')
-    const start = subtitleData?.slice(0, 8).join(' ')
-    const end = subtitleData?.slice(-1).join(' ').slice(1)
+  const subtitleData = subtitle?.split(' ')
+  const start = subtitleData?.slice(0, 8).join(' ')
+  const end = subtitleData?.slice(-1).join(' ').slice(1)
 
-    function textGenerator (value: string | null, type: string) {
+  function textGenerator (value: string | null, nameSeparator: string) {
 
-      if (!value) {
-        return ''
-      }
-
-      if (type === 'phone') {
-        const digits = value.replace(/\D/g, '').slice(0, 11)
-
-        if (!digits) return '';
-
-        let result = '';
-
-        if (digits[0] === '7') {
-          result = '+7';
-        } else if (digits[0] === '8') {
-          result = '8';
-        } else {
-          result = digits[0];
-        }
-
-        if (digits.length > 1) {
-          result += ` (${digits.slice(1, 4)}`;
-        }
-
-        if (digits.length >= 4) {
-          result += ')';
-        }
-
-        if (digits.length > 4) {
-          result += ` ${digits.slice(4, 7)}`;
-        }
-
-        if (digits.length > 7) {
-          result += `-${digits.slice(7, 9)}`;
-        }
-
-        if (digits.length > 9) {
-          result += `-${digits.slice(9, 11)}`;
-        }
-
-        return result;
-      }
-
-      if (type === 'inn') {
-        return value.slice(0,12)
-      }
-
-      if (type === 'ogrn') {
-        return value.slice(0,15)
-      }
-
-      return value
-
-      
+    if (!value) {
+      return ''
     }
 
+    if (nameSeparator === 'phone') {
+      const digits = value.replace(/\D/g, '').slice(0, 11)
 
-    function typesInput (type: string) {
+      if (!digits) return '';
 
-      switch (type) {
-        case 'phone':
-          return 'tel'
-        case 'inn':
-          return 'number'
-        case 'ogrn':
-          return 'number'
-        default:
-          return 'text'
+      let result = '';
+
+      if (digits[0] === '7') {
+        result = '+7';
+      } else if (digits[0] === '8') {
+        result = '8';
+      } else {
+        result = digits[0];
       }
+
+      if (digits.length > 1) {
+        result += ` (${digits.slice(1, 4)}`;
+      }
+
+      if (digits.length >= 4) {
+        result += ')';
+      }
+
+      if (digits.length > 4) {
+        result += ` ${digits.slice(4, 7)}`;
+      }
+
+      if (digits.length > 7) {
+        result += `-${digits.slice(7, 9)}`;
+      }
+
+      if (digits.length > 9) {
+        result += `-${digits.slice(9, 11)}`;
+      }
+
+      return result;
     }
 
+    if (nameSeparator == 'inn') {
+      return value.slice(0,12)
+    }
+
+    if (nameSeparator == 'ogrn') {
+      return value.slice(0,15)
+    }
+
+    return value
+
+    
+  }
+
+
+  function typesInput (type: string) {
+
+    switch (type) {
+      case 'phone':
+        return 'tel'
+      case 'inn':
+        return 'number'
+      case 'ogrn':
+        return 'number'
+      default:
+        return 'text'
+    }
+  }
+
+
+  const nameSeparator = name?.split('_')[0]
 
   return (
     <div className={styles.input_container}>
         <span className={styles.input_title}>{title}</span>
         <input
-          type={typesInput(name as string)}
-          autoComplete={(name === 'phone') ? 'tel' : undefined }
+          type={typesInput(nameSeparator as string)}
+          autoComplete={(nameSeparator == 'phone') ? 'tel' : undefined }
           style={(error) ? {borderColor: 'red'} : {borderColor: '#E9E9E9'}}
           placeholder={placeholder}
           className={styles.input}
-          value={(name) ? textGenerator(value, name) : value}
+          value={(nameSeparator == 'phone' || nameSeparator == 'inn' || nameSeparator == 'ogrn') ? textGenerator(value, nameSeparator) : value}
           onChange={onChange}
           onFocus={(e) => {
             e.target.style = 'border-color: #e9e9e9;'
@@ -121,7 +123,7 @@ const Input: FC<InputProps> = ({ title, value, placeholder, onChange, error, nam
           (subtitle) && (
             <div className={styles.input_subtitle_container}>
               <span className={styles.input_subtitle_text}>{start}</span>
-              <Link className={styles.input_subtitle_link} href={`https://t.me/${end}`}>@{end}</Link>
+              <Link className={styles.input_subtitle_link} href={`https://t.me/${end}`} target='_blanck'>@{end}</Link>
             </div>
           )
         }
