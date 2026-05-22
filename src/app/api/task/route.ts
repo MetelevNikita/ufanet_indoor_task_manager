@@ -129,7 +129,6 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
 
         const ObjectEntries = Object.fromEntries(convertBodyEntries)
 
-
         if (ObjectEntries.length < 1) {
             return NextResponse.json({
                 success: false,
@@ -139,46 +138,33 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
         }
 
         function changeObjFromFieldYouGile(data: any): string {
-
-            let arr: string[] = ['Сообщение с сайта ufanet.zakaz']
-
-            for (let item of data) {
-                if (item[1] && typeof item[1] === 'object' && 'fieldName' in item[1] && 'data' in item[1]) {
-                    arr.push(`<strong>${item[1].fieldName}</strong><br><div>${item[1].data}</div>`)
-                } 
-            }
-            return arr.join('<br><br>')
+            const basicMessage = data.map((item: [string, {fieldName: string, data: string}], index: number) => {
+                return `${index+1})<strong>${item[1].fieldName}</strong><br><div>${item[1].data}</div>`
+            })
+            return ['Сообщение с сайта ufanet.zakaz<br><br>', ...basicMessage].join('<br><br>')
         }
 
         function changeObjFromFieldTelegram(data: any): string {
-
-            let arr: string[] = ['Сообщение с сайта ufanet.zakaz']
-
-            for (let item of data) {
-                if (item[1] && typeof item[1] === 'object' && 'fieldName' in item[1] && 'data' in item[1]) {
-                    arr.push(`<b>${item[1].fieldName}</b>\n${item[1].data}`)
-                } 
-            }
-            return arr.join('\n\n')
+            const basicMessage = data.map((item: [string, {fieldName: string, data: string}], index: number) => {
+                return `${index+1})<b>${item[1].fieldName}</b>\n${item[1].data}`
+            })
+            return ['Сообщение с сайта ufanet.zakaz\n\n', ...basicMessage].join('\n\n')
         }
 
         function changeObjFromFieldBasic(data: any): string {
+            const basicMessage = data.map((item: [string, {fieldName: string, data: string}], index: number) => {
+                return `${index+1})${item[1].fieldName} - ${item[1].data}`
+            })
 
-            let arr: string[] = ['Сообщение с сайта ufanet.zakaz']
-
-            for (let item of data) {
-                if (item[1] && typeof item[1] === 'object' && 'fieldName' in item[1] && 'data' in item[1]) {
-                    arr.push(`${item[1].fieldName}:${item[1].data}`)
-                } 
-            }
-            return arr.join(' ')
+            return ['Сообщение с сайта ufanet.zakaz ', ...basicMessage].join(' ')
         }
 
 
         const basicMessage = changeObjFromFieldBasic(convertBodyEntries)
         const messageYouGile = changeObjFromFieldYouGile(convertBodyEntries)
         const messageTelegram = changeObjFromFieldTelegram(convertBodyEntries)
-    
+
+
 
         // sendToYougle
 
