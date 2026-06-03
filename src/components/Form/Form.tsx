@@ -61,6 +61,9 @@ interface FormProps {
 const Form: FC<FormProps> = ({endpoint}) => {
 
 
+    console.log('endpoint ', endpoint)
+
+
     const { modal, setModal } = useContext(ModalSubmitActive) as {modal: boolean | null, setModal: (e: any) => any}
     const {title, setTitle} = useContext(TitleContext) as {title: string | null, setTitle: (e: string) => void}
 
@@ -88,15 +91,15 @@ const Form: FC<FormProps> = ({endpoint}) => {
     }
 
 
+
     // validate from
 
     function validateForm() {
         const nextErrors: Record<string, boolean> = {}
-        
+      
+        currentDirectionForm.data.forEach((item: any) => {
 
-        currentDirectionForm.data.data.forEach((item: any) => {
-
-          if (item.name !== 'logotype') {
+          if (item.name !== 'logotype' || item.name !== 'tgid' || item.name !== 'payment') {
 
           const value = dataForm[item.name]?.data
 
@@ -117,9 +120,11 @@ const Form: FC<FormProps> = ({endpoint}) => {
     }
 
     //
+
   
 
-    const currentDirectionForm = currentTypeTask(type)
+    const currentDirectionForm = currentTypeTask(type, dataForm.selfVideo?.data[0]) ?? null
+
 
     useEffect(() => {
 
@@ -153,9 +158,10 @@ const Form: FC<FormProps> = ({endpoint}) => {
     }
 
 
-    function generateFormField (json: any): React.ReactNode {
+    function generateFormField (data: any): React.ReactNode {
 
-        return json.data.map((item: any, index: number) => {
+
+        return data.map((item: any, index: number) => {
             switch (item.type) {
               case 'input':
                 return <Col className='mt-1 mb-2' key={index}><Input
@@ -343,8 +349,6 @@ const Form: FC<FormProps> = ({endpoint}) => {
           }
         }
 
-
-
         // send to YG
 
         const result = await sendTaskYG(insertTypeFromBody)
@@ -418,9 +422,14 @@ const Form: FC<FormProps> = ({endpoint}) => {
       }
 
       <Row className='d-flex flex-column mb-5'>
+
+
           {
             generateFormField(currentDirectionForm.data)
           }
+
+
+   
       </Row>
 
 
@@ -440,7 +449,7 @@ const Form: FC<FormProps> = ({endpoint}) => {
         <Col>
           <Button text={'Назад'} onClick={() => {
             setTitle('')
-            router.push('/')
+            router.back()
           }} />
         </Col>
       </Row>

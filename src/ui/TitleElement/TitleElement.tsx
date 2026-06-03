@@ -29,7 +29,7 @@ const TitleElement: FC<TitleElementProps> = ({ subtitle }) => {
 
   return (
         <Row className='d-flex justify-content-center align-items-center'>
-            <Col md={5} className={'d-flex justify-content-md-end justify-content-center align-items-center mt-3 mb-3'}>
+            {/* <Col md={5} className={'d-flex justify-content-md-end justify-content-center align-items-center mt-3 mb-3'}>
                 <motion.div
                     style={{ transformOrigin: 'bottom right' }}
                     className={styles.title}
@@ -47,9 +47,9 @@ const TitleElement: FC<TitleElementProps> = ({ subtitle }) => {
                 >
                         {(title) ? title : "Заказ Уфанет"}
                 </motion.div>
-            </Col>
+            </Col> */}
 
-            <Col md={4} className='mt-3 mb-3 text-md-start text-center'>
+            <Col md={12} className='mt-3 mb-3 d-flex justify-content-center align-items-center'>
                 <motion.div className={styles.subtitle}>{subtitle}</motion.div>
             </Col>
         </Row>

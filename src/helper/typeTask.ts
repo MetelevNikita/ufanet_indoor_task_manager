@@ -1,76 +1,79 @@
 
-import urQrCodeJson from '@/json/fields/uk_qrcodeField.json' with {type: 'json'}
-import ukTextJson from '@/json/fields/uk_textField.json' with {type: 'json'}
-import ukVideoJson from '@/json/fields/uk_videoField.json' with {type: 'json'}
+import {uk_qrcodeField} from '@/app/formField/uk_qrcodeField'
+import {uk_textField} from '@/app/formField/uk_textField'
+import {uk_videoField} from '@/app/formField/uk_video_field'
 
 // 
 
-import businessBannerJson from '@/json/fields/business_banner.json'
-import businessVideoJson from '@/json/fields/business_video.json'
-import businessPhotoJson from '@/json/fields/business_photo.json'
+import {businessBannerField} from '@/app/formField/business_banner'
+import {businessVideoField} from '@/app/formField/business_video'
+import {businessPhotoField} from '@/app/formField/business_photo'
 
 // 
 
-import doctorVideoJson from '@/json/fields/doctor_video.json'
-import doctorSubtitleJson from '@/json/fields/doctor_subtitle.json'
-import medicalVideoJson from '@/json/fields/medical_video.json'
+import {doctorVideoField} from '@/app/formField/doctor_video'
+import {doctorSubtitleField} from '@/app/formField/doctor_subtitle'
+import {medicalVideoField} from '@/app/formField/medical_video'
 
 
-export function currentTypeTask (direction: string): {type: string, label: string, data: any} {
+
+export function currentTypeTask (direction: string, hasVideo?: any): any {
+
+
     switch (direction) {
         case 'uk_text':
             return {
                         type: direction,
                         label: "Умные экрана в ЖК / Для управляющей компании / Текстовое сообщение",
-                        data: ukTextJson
+                        data: uk_textField()
                     }
         case 'uk_video':
             return {
                         type: direction,
                         label: "Умные экрана в ЖК / Для управляющей компании / Видеоролик",
-                        data: ukVideoJson
+                        data: uk_videoField(hasVideo)
                     }
         case 'uk_qrcode':
             return {
                         type: direction,
                         label: "Умные экрана в ЖК / Для управляющей компании / QrCode",
-                        data: urQrCodeJson
+                        data: uk_qrcodeField()
                     }
         case 'business_banner':
             return {
                         type: direction,
                         label: "Умные экрана в ЖК / Для бизнеса / VIP Баннер",
-                        data: businessBannerJson
+                        data: businessBannerField()
                     }
         case 'business_video':
             return {
                         type: direction,
                         label: "Умные экрана в ЖК / Для бизнеса / Видеоролик",
-                        data: businessVideoJson
+                        data: businessVideoField()
                     }
         case 'business_photo':
             return {
                         type: direction,
                         label: "Фотоотчет",
-                        data: businessPhotoJson
+                        data: businessPhotoField()
                     }
         case 'doctor_video':
             return {
                         type: direction,
                         label: "Видео с нуля",
-                        data: doctorVideoJson
+                        data: doctorVideoField()
                     }
         case 'doctor_subtitle':
             return {
                         type: direction,
                         label: "Субтитрирование готового ролика",
-                        data: doctorSubtitleJson
+                        data: doctorSubtitleField()
                     }
         case 'medical_video':
             return {
                         type: direction,
                         label: "Поликлиника ТВ / Для Бизнеса",
-                        data: medicalVideoJson
+                        data: medicalVideoField()
                     }
         default:
             return {
