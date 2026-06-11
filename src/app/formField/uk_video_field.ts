@@ -73,21 +73,13 @@ export function uk_videoField (hasVideo: string)  {
         },
         {
         id: 5,
-        name: "tgid",
-        type: "input",
-        title: "Ваш телеграм id (для связи)",
-        placeholder: "0000000",
-        subtitle: "Узнать ваш Telegram ID можно с помощью бота @Getmyid_Work_Bot",
-        },
-        {
-        id: 6,
         name: "date_start",
         type: "date",
         title: "Дата начала показа",
         placeholder: "дата",
         },
         {
-        id: 7,
+        id: 6,
         name: "date_end",
         type: "date",
         title: "Дата окончания показа",
@@ -99,18 +91,18 @@ export function uk_videoField (hasVideo: string)  {
     if (hasVideo === 'Да') {
         field.push(
                 {
-                id: 10,
+                id: 7,
                 name: "video_link",
                 type: "input",
                 title: "Ссылка на видео (ролик)",
                 placeholder: "прикрепите ссылку на диск или файлообменник",
                 },
                 {
-                id: 10,
+                id: 8,
                 name: "video_tech_spec",
                 type: "area",
-                title: "Технические хорактеристики видео (1920x1080 .mp4)",
-                placeholder: "(1920x1080 .mp4)",
+                title: "Технические хорактеристики видео (1032x774.mp4)",
+                placeholder: "(1032x774.mp4)",
                 },
         )
     }
@@ -119,14 +111,14 @@ export function uk_videoField (hasVideo: string)  {
     if (hasVideo === 'Нет') {
         field.push(
             {
-            id: 8,
+            id: 9,
             name: "title",
             type: "input",
             title: "Заголовок объявления",
             placeholder: "до 20 символов",
             },
             {
-            id: 9,
+            id: 10,
             name: "duration",
             type: "input",
             title: "Хронометраж видео",

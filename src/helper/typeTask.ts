@@ -24,49 +24,49 @@ export function currentTypeTask (direction: string, hasVideo?: any): any {
         case 'uk_text':
             return {
                         type: direction,
-                        label: "Умные экрана в ЖК / Для управляющей компании / Текстовое сообщение",
+                        label: "Умные экрана в ЖК/Для управляющей компании/Текстовое сообщение",
                         data: uk_textField()
                     }
         case 'uk_video':
             return {
                         type: direction,
-                        label: "Умные экрана в ЖК / Для управляющей компании / Видеоролик",
+                        label: "Умные экрана в ЖК/Для управляющей компании/Видеоролик",
                         data: uk_videoField(hasVideo)
                     }
         case 'uk_qrcode':
             return {
                         type: direction,
-                        label: "Умные экрана в ЖК / Для управляющей компании / QrCode",
+                        label: "Умные экрана в ЖК/Для управляющей компании/QrCode",
                         data: uk_qrcodeField()
                     }
         case 'business_banner':
             return {
                         type: direction,
-                        label: "Умные экрана в ЖК / Для бизнеса / VIP Баннер",
+                        label: "Умные экрана в ЖК/Для бизнеса/VIP Баннер",
                         data: businessBannerField()
                     }
         case 'business_video':
             return {
                         type: direction,
-                        label: "Умные экрана в ЖК / Для бизнеса / Видеоролик",
+                        label: "Умные экрана в ЖК/Для бизнеса/Видеоролик",
                         data: businessVideoField()
                     }
         case 'business_photo':
             return {
                         type: direction,
-                        label: "Фотоотчет",
+                        label: "Умные экрана в ЖК/Для бизнеса/Фотоотчет",
                         data: businessPhotoField()
                     }
         case 'doctor_video':
             return {
                         type: direction,
-                        label: "Видео с нуля",
+                        label: "Поликлиника ТВ/Для Минздрава, Главврача/Видео с нуля",
                         data: doctorVideoField()
                     }
         case 'doctor_subtitle':
             return {
                         type: direction,
-                        label: "Субтитрирование готового ролика",
+                        label: "Поликлиника ТВ/Для Минздрава, Главврача/Субтитрирование готового ролика",
                         data: doctorSubtitleField()
                     }
         case 'medical_video':

@@ -16,7 +16,7 @@ const InfoTitle:FC<InfoTitleProps> = ({ title }) => {
   return (
     <Container>
         <Row>
-            <Col className='d-flex justify-content-center align-items-center mt-5 mb-5'>
+            <Col className='d-flex justify-content-center align-items-center mt-1 mb-3'>
                 <div className={styles.title}>{title}</div>
             </Col>
         </Row>

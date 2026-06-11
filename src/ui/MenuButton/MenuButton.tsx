@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { motion } from 'motion/react'
-import Image from 'next/image';
+
 
 // icon
 
@@ -14,7 +14,6 @@ import styles from './MenuButton.module.css'
 // icons
 
 import { IoArrowForward } from "react-icons/io5";
-import { StaticImageData } from 'next/image';
 
 
 interface MenuButtonProps {

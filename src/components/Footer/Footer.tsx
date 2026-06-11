@@ -33,8 +33,8 @@ const Footer: FC = () => {
             </Col>
 
             <Col md={4} xs={12} className='d-flex justify-content-md-end justify-content-center align-items-center'>
-                <div onClick={() => {
-                }}>техническая поддержка</div>
+                <a className={styles.footer_link} href='https://t.me/MetelevNikita' target='_blank'>техническая поддержка</a>
+                
             </Col>
 
 

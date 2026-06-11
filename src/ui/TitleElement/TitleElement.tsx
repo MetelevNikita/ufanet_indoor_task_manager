@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useContext } from 'react'
+import { FC, useContext, Activity } from 'react'
 import { motion } from 'motion/react'
 import { useRouter } from 'next/navigation'
 import { TitleContext } from '@/app/(main)/layout'
@@ -29,28 +29,18 @@ const TitleElement: FC<TitleElementProps> = ({ subtitle }) => {
 
   return (
         <Row className='d-flex justify-content-center align-items-center'>
-            {/* <Col md={5} className={'d-flex justify-content-md-end justify-content-center align-items-center mt-3 mb-3'}>
-                <motion.div
-                    style={{ transformOrigin: 'bottom right' }}
-                    className={styles.title}
-                    whileHover={{scale: 1.1, backgroundColor: '#ff7733'}}
-                    initial={{rotate: -20, opacity: 0, scale: 0.5}}
-                    animate={{rotate: 0, opacity: 1, scale: 1}}
-                    transition={{
-                        duration: 0.5,
-                        scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 }
-                        
-                    }}
-                    onClick={() => {
-                        router.push('/')
-                    }}
-                >
-                        {(title) ? title : "Заказ Уфанет"}
-                </motion.div>
-            </Col> */}
 
-            <Col md={12} className='mt-3 mb-3 d-flex justify-content-center align-items-center'>
-                <motion.div className={styles.subtitle}>{subtitle}</motion.div>
+            <Col md={12} className='mt-1 mb-1 d-flex justify-content-center align-items-center'>
+                <motion.div className={styles.title}>{subtitle}</motion.div>
+            </Col>
+
+            {/*  */}
+
+
+            <Col md={12} className={'d-flex justify-content-center align-items-center mt-3 mb-3'}>
+                <Activity mode={title ? "visible" : "hidden"}>
+                    <div className={styles.navigation}>Вы находитесь во вкладке: {title}</div>
+                </Activity>
             </Col>
         </Row>
   )

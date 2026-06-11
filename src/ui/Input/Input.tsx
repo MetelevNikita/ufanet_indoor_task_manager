@@ -21,7 +21,6 @@ interface InputProps {
 const Input: FC<InputProps> = ({ title, value, placeholder, onChange, error, name, subtitle }) => {
 
 
-
   const subtitleData = subtitle?.split(' ')
   const start = subtitleData?.slice(0, 8).join(' ')
   const end = subtitleData?.slice(-1).join(' ').slice(1)

@@ -13,7 +13,7 @@ import { saveFile } from "@/lib/saveFile";
 
 import { telegramBot } from "@/lib/telegramBot";
 
-async function getCurrentColumnId (url: string, key: number | string) {
+async function getCurrentColumns (url: string, key: number | string) {
 
 
     try {
@@ -52,40 +52,93 @@ async function getCurrentColumnId (url: string, key: number | string) {
             throw new Error('ERROR')
         }
 
-        const currentBoard = getBoards.data.content.find((board: {title: string}) => board.title === 'Производство')
 
-        if (!currentBoard) {
+        // Производство
+
+        const currentBoardProduction = getBoards.data.content.find((board: {title: string}) => board.title === 'Производство')
+
+        if (!currentBoardProduction) {
              throw new Error(`ОШИБКА! не удалось найти нужную доску`)
         }
 
         //  Колонки
 
-        const getColumns = await getData(
+        const getProductionColumns = await getData(
             `${url}/columns`,
-            `Данные колонок ${currentBoard.title} успешно получены`,
+            `Данные колонок ${currentBoardProduction.title} успешно получены`,
             `Ошибка получения колонок ${currentProjects.title} YouGile`,
             key as string
         )
 
-        if (!getColumns) {
+        if (!getProductionColumns) {
             throw new Error('ERROR')
         }
 
-        const сurrentColumn = getColumns.data.content.find((column: {title: string}) => column.title === 'Входящие заявки с сайта ufanet.zakaz') ?? {}
+        const сurrentColumnProduction = getProductionColumns.data.content.find((column: {title: string}) => column.title === 'Входящие заявки с сайта ufanet.zakaz') ?? {}
 
-        if (!сurrentColumn) {
+        if (!сurrentColumnProduction) {
              throw new Error(`ОШИБКА! не удалось найти нужную колонку`)
         }
 
 
 
 
+        // Редакция
 
+
+        const currentBoardEditorial = getBoards.data.content.find((board: {title: string}) => board.title === 'Выпускающая редакция')
+
+        if (!currentBoardEditorial) {
+             throw new Error(`ОШИБКА! не удалось найти нужную доску`)
+        }
+
+        //  Колонки
+
+        const getEditorialColumns = await getData(
+            `${url}/columns`,
+            `Данные колонок ${currentBoardProduction.title} успешно получены`,
+            `Ошибка получения колонок ${currentProjects.title} YouGile`,
+            key as string
+        )
+
+        if (!getEditorialColumns) {
+            throw new Error('ERROR')
+        }
+
+        const сurrentColumnEditorial = getProductionColumns.data.content.find((column: {title: string}) => column.title === 'Входящие заявки от УК') ?? {}
+
+        if (!сurrentColumnEditorial) {
+             throw new Error(`ОШИБКА! не удалось найти нужную колонку`)
+        }
+
+
+
+        const res = [
+                {
+                    id: 1,
+                    board: currentBoardProduction.title,
+                    column: {
+                        title: сurrentColumnProduction.title,
+                        id: сurrentColumnProduction.id
+                    }
+                },
+                {
+                    id: 2,
+                    board: currentBoardEditorial.title,
+                    column: {
+                        title: сurrentColumnEditorial.title,
+                        id: сurrentColumnEditorial.id
+                    }
+                }
+            ]
+
+
+        console.log(res)
 
         return {
             success: true,
             message: 'Данные колонки получены',
-            data: сurrentColumn
+            data: res
         }
         
     } catch (error) {
@@ -169,41 +222,64 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
         // sendToYougle
 
 
-        const correctColumn = await getCurrentColumnId(url, apiKey)
+        const correctColumns = await getCurrentColumns(url, apiKey) as any
 
-        if (!correctColumn) {
+        if (!correctColumns) {
             return NextResponse.json({
                 success: false,
                 message: 'ERROR',
                 data: null
             })
         }
+        const type = ObjectEntries?.typeTask?.data.split('/')[1] ?? ''
+        console.log(type)
 
 
-        const resultYGmessage = await postData(`${url}/tasks`,
-            {
-                title: basicMessage,
-                columnId: correctColumn.data.id,
-                description: messageYouGile,
+        if (type === 'Для управляющей компании') {
 
-            },
-            `Задача в YouGile успешно создана`,
-            `Ошибка создания задачи в YouGile`,
-            apiKey as string
-        )
+            const resultYGmessage = await postData(`${url}/tasks`,
+                {
+                    title: basicMessage,
+                    columnId: correctColumns.data[1].column.id,
+                    description: messageYouGile,
 
-        if (!resultYGmessage.success) {
-            throw new Error('Сетевая ошибка отправки задачи в Yougile')
+                },
+                `Задача в YouGile успешно создана`,
+                `Ошибка создания задачи в YouGile`,
+                apiKey as string
+            )
+
+            if (!resultYGmessage.success) {
+                throw new Error('Сетевая ошибка отправки задачи в Yougile')
+            }
+        } else {
+            const resultYGmessage = await postData(`${url}/tasks`,
+                {
+                    title: basicMessage,
+                    columnId: correctColumns.data[0].column.id,
+                    description: messageYouGile,
+
+                },
+                `Задача в YouGile успешно создана`,
+                `Ошибка создания задачи в YouGile`,
+                apiKey as string
+            )
+
+            if (!resultYGmessage.success) {
+                throw new Error('Сетевая ошибка отправки задачи в Yougile')
+            }
+
         }
+
 
         // sendToTelegram
 
         const bot = await telegramBot()
         const botName = await bot.getMe()
-        console.log(`Отправляем сообщение от имени бота ${botName.first_name}`)
+        console.log(`Отправляем сообщение от имени бота`)
 
         const resultTGMessage = await bot.sendMessage(process.env.TG_ID_GROUP as string, messageTelegram, {parse_mode: 'HTML'})
-        console.log(resultTGMessage)
+        console.log(`Сообщение в телеграм отправлено ${resultTGMessage.message_id}`)
 
         return NextResponse.json({
             success: true,

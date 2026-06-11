@@ -19,22 +19,22 @@ interface SelectProps {
     data: any
     state: any
     name: string
-
-
+    error: any
 }
 
 
-const Select: FC<SelectProps> = ({ title, arr, value, onChange, data, state, name }) => {
+const Select: FC<SelectProps> = ({ title, arr, value, onChange, data, state, name, error }) => {
 
     const {dataForm, setDataForm} = state
     const fieldValue = dataForm[name]
     const fieldData = fieldValue?.data[0] ?? ''
 
+
     return (
         <div className={styles.select_container}>
 
             <span className={styles.select_title}>{title}</span>
-            <select className={styles.select_input} name={value} id={value} onChange={onChange} defaultValue={""}>
+            <select className={styles.select_input} name={value} id={value} onChange={onChange} defaultValue={""} style={(error) ? {borderColor: 'red'} : {borderColor: '#E9E9E9'}}>
                 <option disabled value={''}>{'выберите значение'}</option>
                 {
                     arr.map((opt, index) => {

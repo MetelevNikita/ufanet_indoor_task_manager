@@ -60,10 +60,6 @@ interface FormProps {
 
 const Form: FC<FormProps> = ({endpoint}) => {
 
-
-    console.log('endpoint ', endpoint)
-
-
     const { modal, setModal } = useContext(ModalSubmitActive) as {modal: boolean | null, setModal: (e: any) => any}
     const {title, setTitle} = useContext(TitleContext) as {title: string | null, setTitle: (e: string) => void}
 
@@ -77,9 +73,6 @@ const Form: FC<FormProps> = ({endpoint}) => {
     const [qrCodePath, setQrCodePath] = useState<string>('')
     const [resultApi, setResultApi] = useState<{success: boolean, message: string, data: any} | null>(null)
     const [errors, setErrors] = useState<Record<string, boolean>>({})
-
-
-
 
     // 
 
@@ -95,28 +88,29 @@ const Form: FC<FormProps> = ({endpoint}) => {
     // validate from
 
     function validateForm() {
-        const nextErrors: Record<string, boolean> = {}
-      
-        currentDirectionForm.data.forEach((item: any) => {
+      const nextErrors: Record<string, boolean> = {}
 
-          if (item.name !== 'logotype' || item.name !== 'tgid' || item.name !== 'payment') {
+      const excludedFields = ['logotype', 'tgid']
 
-          const value = dataForm[item.name]?.data
+      currentDirectionForm.data.forEach((item: any) => {
+        if (excludedFields.includes(item.name)) {
+          return
+        }
 
-          if ( value === undefined || value === null || value === '' || (Array.isArray(value) && value.length === 0)) {
-            nextErrors[item.name] = true
-          }
+        const value = dataForm[item.name]?.data
 
+        if (
+          value === undefined ||
+          value === null ||
+          value === '' ||
+          (Array.isArray(value) && value.length === 0)
+        ) {
+          nextErrors[item.name] = true
+        }
+      })
 
-          }
-
-        })
-
-
-
-
-        setErrors(nextErrors)
-        return Object.keys(nextErrors).length === 0
+      setErrors(nextErrors)
+      return Object.keys(nextErrors).length === 0
     }
 
     //
@@ -127,29 +121,7 @@ const Form: FC<FormProps> = ({endpoint}) => {
 
 
     useEffect(() => {
-
-      switch (type) {
-          case 'uk_text':
-              setTitle('Текстовое сообщение')
-            return
-          case 'uk_qrcode':
-              setTitle('Размещение QrCode')
-            return
-          case 'uk_video':
-              setTitle('Видеоролик')
-            return
-          case 'doctor_video':
-              setTitle('Для Минздрава/Главврача')
-            return 
-          case 'medical_video':
-              setTitle('Для бизнеса')
-            return 
-          default:
-              setTitle('Заказ Уфанет')
-            return 
-        }
-        
-
+      setTitle(title as string)
     }, [type])
 
 
@@ -206,10 +178,15 @@ const Form: FC<FormProps> = ({endpoint}) => {
                           value={dataForm[item.name]?.data || []}
                           onChange={(e: any) => {
                            (item.multi) ? setDataForm({...dataForm, [item.name]: {fieldName: item.title, data: [...(dataForm[item.name]?.data || []), e.target.value]}}) : setDataForm({...dataForm, [item.name]: {fieldName: item.title, data: [e.target.value]}})
+                           setErrors((prev: any) => ({
+                              ...errors,
+                              [item.name]: false
+                            }))
                           }}
                           data={dataForm[item.name]?.data}
                           state={{dataForm, setDataForm}}
                           name={item.name}
+                          error={errors[item.name]}
                         /></Col>
               case 'date':
                 return <Col className='mt-1 mb-2' key={index}><DateInput
@@ -341,15 +318,20 @@ const Form: FC<FormProps> = ({endpoint}) => {
 
         if (type === 'uk_qrcode') {
           insertTypeFromBody = {
-            ...dataForm,
+            ...insertTypeFromBody,
             qrcode: {
               fieldName: dataForm.qrcode?.fieldName || 'QrCode',
               data: qrCodePath
             }
           }
         }
+        
 
-        // send to YG
+
+        if (insertTypeFromBody?.payment && insertTypeFromBody?.payment.data[0] === 'Нет') {
+          alert('Договор не оплачен. Для создания заявки необходим подписанный и оплаченный договор')
+          return
+        }
 
         const result = await sendTaskYG(insertTypeFromBody)
         
@@ -387,7 +369,6 @@ const Form: FC<FormProps> = ({endpoint}) => {
 
   return (
     <Container>
-
 
       {
         (modal !== null) && (

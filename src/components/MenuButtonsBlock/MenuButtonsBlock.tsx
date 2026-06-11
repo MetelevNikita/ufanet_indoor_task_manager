@@ -1,10 +1,12 @@
 
 'use client'
 
-import { FC } from 'react'
+import { FC, useContext, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-// 
+// context
+
+import { TitleContext } from '@/app/(main)/layout'
 
 // bootstrap
 
@@ -24,6 +26,15 @@ interface MenuButtonsBlockProps {
 const MenuButtonsBlock: FC<MenuButtonsBlockProps> = ({ data, category }) => {
 
 const router = useRouter()
+const {title, setTitle} = useContext(TitleContext) as any
+
+useEffect(() => {
+    if (!title) {
+        setTitle('Заказ Уфанет')
+    }
+}, [title])
+
+console.log(title)
 
   return (
     <Row className={'d-flex justify-content-center align-items-center mt-5'}>
@@ -42,6 +53,8 @@ const router = useRouter()
                     return (
                         <Col md={4} key={index} className='d-flex justify-content-center mt-2 mb-2'>
                             <MenuButton title={item.title} subtitle={item.subtitle} icon={''} onClick={() => {
+                                console.log(item.title)
+                                setTitle(`${title}/${item.title}`)
                                 router.push(`/${category}/${item.endpoint}`)
                             }} />
                         </Col>

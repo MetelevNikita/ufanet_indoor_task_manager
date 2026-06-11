@@ -1,11 +1,11 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useContext } from 'react'
 import { useRouter } from 'next/navigation'
 
 // context
 
-import { ModalSubmitActive } from './layout'
+import { TitleContext } from './layout'
 
 
 
@@ -36,6 +36,8 @@ const page: FC = () => {
 
 const router = useRouter()
 
+const {title, setTitle} = useContext(TitleContext) as any
+
   return (
     <Container>
 
@@ -45,9 +47,10 @@ const router = useRouter()
             <Col md={4} className='d-flex justify-content-center mt-2 mb-2'>
                 <MenuButton
                     title={'Умные экраны в ЖК'}
-                    subtitle={'Разместить QR code или рекламный ролик'}
+                    subtitle={''}
                     icon={<FaTv className={styles.menu_button_icon}/>}
                     onClick={() => {
+                        setTitle('Умные экраны в ЖК')
                         router.push('/smartscreen')
                     }}
                 />
@@ -57,9 +60,10 @@ const router = useRouter()
             <Col md={4} className='d-flex justify-content-center mt-2 mb-2'>
                 <MenuButton
                     title={'Поликлиника ТВ'}
-                    subtitle={'Разместить рекламный ролик в поликлиниках вашего города'}
+                    subtitle={''}
                     icon={<MdOutlineMedicalServices className={styles.menu_button_icon}/>}
                     onClick={() => {
+                        setTitle('Поликлиника ТВ')
                         router.push('/clinic')
                     }}
                 />
