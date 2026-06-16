@@ -48,8 +48,8 @@ export function businessVideoField ()  {
         id: 4,
         name: "tgid",
         type: "input",
-        title: "Телеграм id менеджера (для связи)",
-        placeholder: "0000000",
+        title: "Телеграм id (для связи)",
+        placeholder: "Телеграм id менеджера (000000000)",
         subtitle: "Узнать ваш Telegram ID можно с помощью бота @Getmyid_Work_Bot",
         },
         {

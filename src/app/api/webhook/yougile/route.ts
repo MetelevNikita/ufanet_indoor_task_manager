@@ -10,7 +10,7 @@ import { getYGUsers } from "@/functions/yougileFnWebhook/getYGUsers";
 
 function findId (text: string) {
 
-    const regExp = /Ваш\s*телеграм\s*id\s*\(для\s*связи\)\s*-\s*(\d+)/i
+    const regExp = /Телеграм\s*id\s*\(для\s*связи\)\s*-\s*(\d+)/i
 
     const findId = text.match(regExp)
     console.log(findId)
