@@ -211,9 +211,21 @@ async function createWebHookYouGile () {
             }
         }
 
-        if (getAllWebhooks.data.length < 1) {
 
-            console.log('Подписка не создана, запускаю процесс создания')
+        console.log('WEBHOOKS ', getAllWebhooks)
+
+        const checkCreateWebhook = getAllWebhooks.data.find((item: {url: string}) => item.url == `${webhookUrl}/api/webhook/yougile`) ?? null
+
+        
+
+        let resulWwebhook
+
+        if (checkCreateWebhook) {
+            console.log('ВЕБХУК НАЙДЕН ', checkCreateWebhook)
+            resulWwebhook = checkCreateWebhook
+        } else {
+            console.log('ВЕБХУК НЕ ОБНАРУЖЕН - Запускаю создание')
+
             const webhookYougile = await postData(
                 `${url}/webhooks`,
                 {
@@ -224,19 +236,17 @@ async function createWebHookYouGile () {
                 'Ошибка создания вебхука YouGile',
                 key
             )
-            return {
-                success: true,
-                message: 'Вебхук YouGile успешно создан',
-                data: `${webhookUrl}/api/webhook/yougile`
-            }
-        } else {
-        return getAllWebhooks.data[0]
+
+            console.log('НОВЫЙ ВЕБХУК СОЗДАН ', webhookYougile)
+            resulWwebhook = webhookYougile
         }
 
-
-
-
-
+        return {
+            success: true,
+            message: 'Вебхук YouGile успешно создан',
+            data: resulWwebhook
+        }
+      
         
     } catch (error: Error | unknown) {
 
@@ -340,7 +350,7 @@ async function startServices () {
             [
                 await getYouGileApiKey(),
                 await createWebhookTelegram(),
-                await deleteAllWebhooks(),
+                // await deleteAllWebhooks(),
                 await createWebHookYouGile()
             ]
         ).catch((error) => {

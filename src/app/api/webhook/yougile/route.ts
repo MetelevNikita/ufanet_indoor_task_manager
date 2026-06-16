@@ -10,7 +10,7 @@ import { getYGUsers } from "@/functions/yougileFnWebhook/getYGUsers";
 
 function findId (text: string) {
 
-    const regExp = /Ваш\s*телеграм\s*id\s*\(для\s*связи\):\s*(\d+)/i
+    const regExp = /Ваш\s*телеграм\s*id\s*\(для\s*связи\)\s*-\s*(\d+)/i
 
     const findId = text.match(regExp)
     console.log(findId)
@@ -25,7 +25,6 @@ export const POST = async (req: NextRequest) => {
 
         const bot = await telegramBot()
         const data = await req.json()
-
         const id = findId(data.payload.title) ?? []
 
         if (id.length < 1) {
