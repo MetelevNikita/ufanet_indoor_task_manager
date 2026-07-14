@@ -252,6 +252,13 @@ export function businessBannerField ()  {
           placeholder: "Введите ОГРН",
           typeInput: "number",
         },
+        {
+          id: 21,
+          name: "comment",
+          type: "area",
+          title: "Комментарий",
+          placeholder: "Введите текст"
+        },
         
     ]
 

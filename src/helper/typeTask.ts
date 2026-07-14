@@ -66,7 +66,7 @@ export function currentTypeTask (direction: string, hasVideo?: any): any {
         case 'doctor_subtitle':
             return {
                         type: direction,
-                        label: "Поликлиника ТВ/Для Минздрава, Главврача/Субтитрирование готового ролика",
+                        label: "Поликлиника ТВ/Для Минздрава, Главврача/Загрузить готовый ролик /Субтитрирование готового ролика ",
                         data: doctorSubtitleField()
                     }
         case 'medical_video':

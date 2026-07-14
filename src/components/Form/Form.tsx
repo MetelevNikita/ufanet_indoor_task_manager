@@ -340,8 +340,6 @@ const Form: FC<FormProps> = ({endpoint}) => {
           setResultApi(result)
           return
         }
-
-        console.log(result)
         setModal(true)
         setResultApi(result)
 

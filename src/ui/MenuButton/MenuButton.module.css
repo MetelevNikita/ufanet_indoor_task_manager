@@ -25,9 +25,9 @@
 }
 
 .menu_button_title {
-    width: 280px;
+    width: 320px;
     color: inherit;
-    font-size: clamp(24px, 2vw, 30px);
+    font-size: clamp(20px, 2vw, 23px);
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -39,6 +39,9 @@
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
+    /*  */
+
+    margin-top: 10px;
 }
 
 /*  */

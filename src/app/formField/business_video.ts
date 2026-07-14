@@ -253,6 +253,13 @@ export function businessVideoField ()  {
         placeholder: "Введите ОГРН",
         typeInput: "number",
         },
+        {
+          id: 22,
+          name: "comment",
+          type: "area",
+          title: "Комментарий",
+          placeholder: "Введите текст"
+        },
     ]
 
     return field

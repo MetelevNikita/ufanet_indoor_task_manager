@@ -60,7 +60,7 @@
         "id": 8,
         "type": "policlinic",
         "category": "policlinic",
-        "title": "Субтитрирование готового ролика",
+        "title": "Загрузить готовый ролик /Субтитрирование готового ролика ",
         "subtitle": "Подготовка и монтаж субтитров" ,
         "endpoint": "form?direction=policlinic&type=doctor_subtitle"
     }

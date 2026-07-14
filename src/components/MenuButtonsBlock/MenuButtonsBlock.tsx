@@ -34,7 +34,6 @@ useEffect(() => {
     }
 }, [title])
 
-console.log(title)
 
   return (
     <Row className={'d-flex justify-content-center align-items-center mt-5'}>
@@ -53,7 +52,6 @@ console.log(title)
                     return (
                         <Col md={4} key={index} className='d-flex justify-content-center mt-2 mb-2'>
                             <MenuButton title={item.title} subtitle={item.subtitle} icon={''} onClick={() => {
-                                console.log(item.title)
                                 setTitle(`${title}/${item.title}`)
                                 router.push(`/${category}/${item.endpoint}`)
                             }} />

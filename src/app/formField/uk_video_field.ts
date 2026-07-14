@@ -65,6 +65,27 @@ export function uk_videoField (hasVideo: string)  {
         },
         {
         id: 4,
+        name: "gk",
+        type: "input",
+        title: "Название жк",
+        placeholder: "жк",
+        },
+        {
+        id: 5,
+        name: "adress",
+        type: "input",
+        title: "Адрес ЖК",
+        placeholder: "адрес",
+        },
+        {
+        id: 6,
+        name: "id_max",
+        type: "input",
+        title: "ID заказчика в Максе",
+        placeholder: "id",
+        },
+        {
+        id: 7,
         name: "phone",
         type: "input",
         title: "Телефон заказчика",
@@ -72,14 +93,14 @@ export function uk_videoField (hasVideo: string)  {
         typeInput: "tel",
         },
         {
-        id: 5,
+        id: 8,
         name: "date_start",
         type: "date",
         title: "Дата начала показа",
         placeholder: "дата",
         },
         {
-        id: 6,
+        id: 9,
         name: "date_end",
         type: "date",
         title: "Дата окончания показа",
@@ -91,14 +112,14 @@ export function uk_videoField (hasVideo: string)  {
     if (hasVideo === 'Да') {
         field.push(
                 {
-                id: 7,
+                id: 10,
                 name: "video_link",
                 type: "input",
                 title: "Ссылка на видео (ролик)",
                 placeholder: "прикрепите ссылку на диск или файлообменник",
                 },
                 {
-                id: 8,
+                id: 11,
                 name: "video_tech_spec",
                 type: "area",
                 title: "Технические хорактеристики видео (1032x774.mp4)",
@@ -111,28 +132,28 @@ export function uk_videoField (hasVideo: string)  {
     if (hasVideo === 'Нет') {
         field.push(
             {
-            id: 9,
+            id: 12,
             name: "title",
             type: "input",
             title: "Заголовок объявления",
             placeholder: "до 20 символов",
             },
             {
-            id: 10,
+            id: 13,
             name: "duration",
             type: "input",
             title: "Хронометраж видео",
             placeholder: "Введите хронометраж видео",
             },
             {
-            id: 11,
+            id: 14,
             name: "text",
             type: "area",
             title: "Основной текст",
             placeholder: "до 300 символов",
             },
             {
-            id: 12,
+            id: 15,
             name: "contacts",
             type: "area",
             title: "Контактный блок",

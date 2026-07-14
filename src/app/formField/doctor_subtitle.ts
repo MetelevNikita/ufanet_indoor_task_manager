@@ -79,6 +79,26 @@ export function doctorSubtitleField ()  {
         title: "Ссылка на видео (ролик)",
         placeholder: "прикрепите ссылку на диск или файлообменник",
         },
+        {
+        id: 8,
+        name: "subtitle",
+        type: "select",
+        title: "Нужны субтитры",
+        placeholder: "",
+        arr: [
+            {
+            id: 1,
+            label: "Да",
+            value: "yes",
+            },
+            {
+            id: 2,
+            label: "Нет",
+            value: "no",
+            },
+        ],
+        multi: false,
+        },
         
     ]
 
