@@ -5,12 +5,16 @@ interface DateProps {
   title: string
   value: string
   placeholder: string
+  dateValidator: {text: string, numDays: number}
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const DateInput: FC<DateProps> = ({ title, value, placeholder, onChange }) => {
+const DateInput: FC<DateProps> = ({ title, value, placeholder, dateValidator, onChange }) => {
+
+  const { numDays } = dateValidator
+
   const date = new Date()
-  date.setDate(date.getDate() + 3)
+  date.setDate(date.getDate() + numDays)
 
   const min = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
 

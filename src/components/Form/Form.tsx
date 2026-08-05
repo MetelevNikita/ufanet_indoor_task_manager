@@ -73,6 +73,7 @@ const Form: FC<FormProps> = ({endpoint}) => {
     const [qrCodePath, setQrCodePath] = useState<string>('')
     const [resultApi, setResultApi] = useState<{success: boolean, message: string, data: any} | null>(null)
     const [errors, setErrors] = useState<Record<string, boolean>>({})
+    const [dateValidator, setDateValidator] = useState<{text: string, numDays: number}>({text: '', numDays: 0})
 
     // 
 
@@ -82,6 +83,9 @@ const Form: FC<FormProps> = ({endpoint}) => {
     if (!type) {
       return
     }
+
+
+
 
 
 
@@ -113,11 +117,36 @@ const Form: FC<FormProps> = ({endpoint}) => {
       return Object.keys(nextErrors).length === 0
     }
 
-    //
 
-  
 
     const currentDirectionForm = currentTypeTask(type, dataForm.selfVideo?.data[0]) ?? null
+
+    console.log(currentDirectionForm)
+
+    useEffect(() => {
+        dateTypeValidator()
+    }, [])
+
+
+    function dateTypeValidator () {
+
+      const { type } = currentDirectionForm
+      console.log(type)
+
+      if (type == 'uk_text' || type == 'uk_banner' || type == 'uk_qrcode' || type == 
+        'doctor_video' || type == 'doctor_subtitle'
+      ) {
+        console.log('Условие на 1 день')
+        setDateValidator({text: 'Дата не может приниматься задним числом', numDays: 1})
+      } else {
+        console.log('условие на 3 дня')
+        setDateValidator({text: 'Нельзя выбрать начальную дату размещения ранее, чем на 3 рабочих дня от текущей', numDays: 3})
+      }
+      
+    }
+
+
+
 
 
     useEffect(() => {
@@ -194,7 +223,10 @@ const Form: FC<FormProps> = ({endpoint}) => {
                           title={item.title}
                           value={dataForm[item.name]?.data || ''}
                           placeholder={item.placeholder}
+                          dateValidator={dateValidator}
                           onChange={(e: any) => {
+
+                              console.log('GET DATE')
 
                               const value = e.target.value
 
@@ -204,13 +236,13 @@ const Form: FC<FormProps> = ({endpoint}) => {
                               
                               const minDate = new Date();
                               minDate.setHours(0, 0, 0, 0);
-                              minDate.setDate(minDate.getDate() + 3);
+                              minDate.setDate(minDate.getDate() + dateValidator.numDays);
 
                               const valueDate = new Date(value);
                               valueDate.setHours(0, 0, 0, 0);
 
                               if (valueDate.getTime() < minDate.getTime()) {
-                                alert('Нельзя выбрать начальную дату размещения ранее, чем на 3 рабочих дня от текущей');
+                                alert(dateValidator.text);
                                 return;
                               }
 

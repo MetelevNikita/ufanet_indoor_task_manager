@@ -58,13 +58,6 @@ export function uk_textField ()  {
         placeholder: "адрес",
         },
         {
-        id: 5,
-        name: "id_max",
-        type: "input",
-        title: "ID заказчика в Максе",
-        placeholder: "id",
-        },
-        {
         id: 6,
         name: "phone",
         type: "input",

@@ -58,14 +58,7 @@ export function uk_qrcodeField ()  {
     placeholder: "адрес",
     },
     {
-    id: 5,
-    name: "id_max",
-    type: "input",
-    title: "ID заказчика в Максе",
-    placeholder: "id",
-    },
-    {
-      id: 6,
+      id: 5,
       name: "phone",
       type: "input",
       title: "Телефон заказчика",
@@ -73,7 +66,7 @@ export function uk_qrcodeField ()  {
       typeInput: "tel",
     },
     {
-      id: 7,
+      id: 6,
       name: "qrcode",
       type: "qrcode",
       title: "ссылка на чат дома/сайт УК",

@@ -78,13 +78,6 @@ export function uk_videoField (hasVideo: string)  {
         placeholder: "адрес",
         },
         {
-        id: 6,
-        name: "id_max",
-        type: "input",
-        title: "ID заказчика в Максе",
-        placeholder: "id",
-        },
-        {
         id: 7,
         name: "phone",
         type: "input",
