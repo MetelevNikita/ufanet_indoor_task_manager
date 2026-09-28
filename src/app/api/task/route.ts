@@ -201,6 +201,10 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
             })
         }
 
+
+
+        console.log('BASE ', ObjectEntries)
+
         function changeObjFromFieldYouGile(data: any): string {
             const basicMessage = data.map((item: [string, {fieldName: string, data: string}], index: number) => {
                 return `${index+1})<strong>${item[1].fieldName}</strong><br><div>${item[1].data}</div>`
@@ -255,17 +259,10 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
         ]
 
 
-
-
-
         const correctColumns = await Promise.all(ygData.map(async (item) => {
             const data = await getYouGileData(url, apiKey, item.id, item.project, item.board, item.column)
             return data
         }))
-
-
-        console.log('DATA ', correctColumns)
-
 
         const type = ObjectEntries?.typeTask?.data.split('/') ?? null as any
         console.log(type)
@@ -316,6 +313,12 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
 
         if (type[1] === 'Для бизнеса') {
             if (type[2] === 'Фотоотчет') {
+
+
+                console.log('TYPE ', type)
+                console.log('CURRENT COLUMN PHOTO ', correctColumns)
+
+
                 const resultYGmessage = await postData(`${url}/tasks`,
                     {
                         title: basicMessage,

@@ -68,10 +68,17 @@ export function businessPhotoField ()  {
         },
         {
         id: 6,
+        name: "number_erp",
+        type: "input",
+        title: "Номер процесса в ЕРП",
+        placeholder: "",
+        },
+        {
+        id: 7,
         name: "comment",
         type: "area",
         title: "Комментарий",
-        placeholder: "дополнительная информация",
+        placeholder: "дополнительная информация (необязательно)",
         },
         
     ]

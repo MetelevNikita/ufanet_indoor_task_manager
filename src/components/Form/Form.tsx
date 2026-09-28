@@ -94,7 +94,7 @@ const Form: FC<FormProps> = ({endpoint}) => {
     function validateForm() {
       const nextErrors: Record<string, boolean> = {}
 
-      const excludedFields = ['logotype', 'tgid']
+      const excludedFields = ['logotype', 'tgid', 'comment']
 
       currentDirectionForm.data.forEach((item: any) => {
         if (excludedFields.includes(item.name)) {
