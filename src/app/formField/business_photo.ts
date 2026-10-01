@@ -61,20 +61,13 @@ export function businessPhotoField ()  {
         },
         {
         id: 5,
-        name: "date",
-        type: "date",
-        title: "Дата фотоотчета",
-        placeholder: "дата",
-        },
-        {
-        id: 6,
         name: "number_erp",
         type: "input",
         title: "Номер процесса в ЕРП",
         placeholder: "",
         },
         {
-        id: 7,
+        id: 6,
         name: "comment",
         type: "area",
         title: "Комментарий",
