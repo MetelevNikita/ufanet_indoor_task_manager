@@ -27,7 +27,7 @@ const Footer: FC = () => {
             </Col>
 
             <Col md={3} xs={12} className='d-flex justify-content-center align-items-center'>
-                <div className={styles.footer_link}>version 1.026</div>
+                <div className={styles.footer_link}>version 1.030</div>
                 <Link className={styles.footer_link} target='_blank' href={'https://github.com/metelevnikita'}>
                     <FaGithub className={styles.footer_icon}/>
                 </Link>
