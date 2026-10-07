@@ -34,10 +34,6 @@ async function getCurrentColumns (url: string, key: number | string) {
             throw new Error('ERROR')
         }
 
-
-        console.log('PROJECTS ', getProjects.data.content)
-
-
         const currentProjects = getProjects.data.content.find((project: {title: string}) => project.title == 'Продакшн для ЖК ТВ и ПТВ')
         const currentProjectsPhoto = getProjects.data.content.find((project: {title: string}) => project.title == 'Фотоотчет')
 
@@ -144,8 +140,6 @@ async function getCurrentColumns (url: string, key: number | string) {
             ]
 
 
-        console.log(res)
-
         return {
             success: true,
             message: 'Данные колонки получены',
@@ -167,7 +161,6 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
     try {
 
 
-        console.log('START')
 
         const url = process.env.YG_BASE_URL as string
         const apiKey = process.env.YG_API_KEY as string
@@ -200,10 +193,6 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
                 data: null
             })
         }
-
-
-
-        console.log('BASE ', ObjectEntries)
 
         function changeObjFromFieldYouGile(data: any): string {
             const basicMessage = data.map((item: [string, {fieldName: string, data: string}], index: number) => {
@@ -264,8 +253,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
             return data
         }))
 
-        const type = ObjectEntries?.typeTask?.data.split('/') ?? null as any
-        console.log(type)
+        const type = ObjectEntries?.typeTask?.data.split('/').map((item: any) => item.trim()) ?? null as any
 
         if (!correctColumns) {
             return NextResponse.json({
@@ -276,32 +264,43 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
         }
 
 
+
+
         if (type[1] === 'Для управляющей компании') {
 
-            const resultYGmessage = await postData(`${url}/tasks`,
-                {
-                    title: basicMessage,
-                    columnId: correctColumns[1].column?.id,
-                    description: messageYouGile,
+            try {
 
-                },
-                `Задача в YouGile успешно создана`,
-                `Ошибка создания задачи в YouGile`,
-                apiKey as string
-            )
 
-            if (!resultYGmessage.success) {
-                throw new Error('Сетевая ошибка отправки задачи в Yougile')
+                
+                const resultYG = await postData(`${url}/tasks`,
+                    {
+                        title: basicMessage,
+                        columnId: correctColumns[1].column?.id,
+                        description: messageYouGile,
+
+                    },
+                    `Задача в YouGile успешно создана`,
+                    `Ошибка создания задачи в YouGile`,
+                    apiKey as string
+                )
+                if (!resultYG.success) throw new Error(resultYG.message)
+                console.info('Задача в YouGile успешно создана', { taskId: resultYG.data?.id })
+
+
+            } catch (error: any) {
+                throw new Error(`Ошибка отправки задачи в YG ${error.message}`);
             }
+
 
             // sendToTelegram
 
-            const bot = await telegramBot()
-            const botName = await bot.getMe()
-            console.log(`Отправляем сообщение от имени бота`)
-
-            const resultTGMessage = await bot.sendMessage(process.env.TG_ID_GROUP as string, messageTelegram, {parse_mode: 'HTML'})
-            console.log(`Сообщение в телеграм отправлено ${resultTGMessage.message_id}`)
+            try {
+                const bot = await telegramBot()
+                const resultTG = await bot.sendMessage(process.env.TG_ID_GROUP as string, messageTelegram, {parse_mode: 'HTML'})
+                console.info('Заявка в Telegram успешно отправлена', { messageId: resultTG.message_id })
+            } catch (error) {
+                throw new Error(`Ошибка отправки заявки в Telegram: ${error instanceof Error ? error.message : String(error)}`, { cause: error })
+            }
 
             return NextResponse.json({
                 success: true,
@@ -312,58 +311,72 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
 
 
         if (type[1] === 'Для бизнеса') {
+
+
+
+
             if (type[2] === 'Фотоотчет') {
 
+                try {
+            
+                     const resultYG = await postData(`${url}/tasks`,
+                        {
+                            title: basicMessage,
+                            columnId: correctColumns[2].column?.id,
+                            description: messageYouGile,
 
-                console.log('TYPE ', type)
-                console.log('CURRENT COLUMN PHOTO ', correctColumns)
+                        },
+                        `Задача в YouGile успешно создана`,
+                        `Ошибка создания задачи в YouGile`,
+                        apiKey as string
+                    )
+                     if (!resultYG.success) throw new Error(resultYG.message)
+                     console.info('Задача в YouGile успешно создана', { taskId: resultYG.data?.id })
 
-
-                const resultYGmessage = await postData(`${url}/tasks`,
-                    {
-                        title: basicMessage,
-                        columnId: correctColumns[2].column?.id,
-                        description: messageYouGile,
-
-                    },
-                    `Задача в YouGile успешно создана`,
-                    `Ошибка создания задачи в YouGile`,
-                    apiKey as string
-                )
-
-                if (!resultYGmessage.success) {
-                    throw new Error('Сетевая ошибка отправки задачи в Yougile')
+                } catch (error: any) {
+                    throw new Error(`Ошибка отправки задачи в YG ${error.message}`);
                 }
+
+
 
             } else {
-                const resultYGmessage = await postData(`${url}/tasks`,
-                    {
-                        title: basicMessage,
-                        columnId: correctColumns[0].column?.id,
-                        description: messageYouGile,
 
-                    },
-                    `Задача в YouGile успешно создана`,
-                    `Ошибка создания задачи в YouGile`,
-                    apiKey as string
-                )
+                try {
 
-                if (!resultYGmessage.success) {
-                    throw new Error('Сетевая ошибка отправки задачи в Yougile')
+
+                    
+                    const resultYG = await postData(`${url}/tasks`,
+                        {
+                            title: basicMessage,
+                            columnId: correctColumns[0].column?.id,
+                            description: messageYouGile,
+
+                        },
+                        `Задача в YouGile успешно создана`,
+                        `Ошибка создания задачи в YouGile`,
+                        apiKey as string
+                    )
+                    if (!resultYG.success) throw new Error(resultYG.message)
+                    console.info('Задача в YouGile успешно создана', { taskId: resultYG.data?.id })
+                    
+
+                } catch (error: any) {
+                    throw new Error(`Ошибка отправки задачи в YG ${error.message}`);
                 }
+
 
             }
 
 
-
             // sendToTelegram
 
-            const bot = await telegramBot()
-            const botName = await bot.getMe()
-            console.log(`Отправляем сообщение от имени бота`)
-
-            const resultTGMessage = await bot.sendMessage(process.env.TG_ID_GROUP as string, messageTelegram, {parse_mode: 'HTML'})
-            console.log(`Сообщение в телеграм отправлено ${resultTGMessage.message_id}`)
+            try {
+                const bot = await telegramBot()
+                const resultTG = await bot.sendMessage(process.env.TG_ID_GROUP as string, messageTelegram, {parse_mode: 'HTML'})
+                console.info('Заявка в Telegram успешно отправлена', { messageId: resultTG.message_id })
+            } catch (error) {
+                throw new Error(`Ошибка отправки заявки в Telegram: ${error instanceof Error ? error.message : String(error)}`, { cause: error })
+            }
 
             return NextResponse.json({
                 success: true,
@@ -374,7 +387,10 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
 
 
         if (type[1] === 'Для Минздрава, Главврача') {
-            const resultYGmessage = await postData(`${url}/tasks`,
+
+            try {
+            
+            const resultYG = await postData(`${url}/tasks`,
                 {
                     title: basicMessage,
                     columnId: correctColumns[0].column?.id,
@@ -385,19 +401,23 @@ export const POST = async (req: NextRequest): Promise<NextResponse | Error> => {
                 `Ошибка создания задачи в YouGile`,
                 apiKey as string
             )
-
-            if (!resultYGmessage.success) {
-                throw new Error('Сетевая ошибка отправки задачи в Yougile')
+            if (!resultYG.success) throw new Error(resultYG.message)
+            console.info('Задача в YouGile успешно создана', { taskId: resultYG.data?.id })
+             } catch (error: any) {
+                throw new Error(`Ошибка отправки задачи в YG ${error.message}`);  
             }
+
+
 
             // sendToTelegram
 
-            const bot = await telegramBot()
-            const botName = await bot.getMe()
-            console.log(`Отправляем сообщение от имени бота`)
-
-            const resultTGMessage = await bot.sendMessage(process.env.TG_ID_GROUP as string, messageTelegram, {parse_mode: 'HTML'})
-            console.log(`Сообщение в телеграм отправлено ${resultTGMessage.message_id}`)
+            try {
+                const bot = await telegramBot()
+                const resultTG = await bot.sendMessage(process.env.TG_ID_GROUP as string, messageTelegram, {parse_mode: 'HTML'})
+                console.info('Заявка в Telegram успешно отправлена', { messageId: resultTG.message_id })
+            } catch (error) {
+                throw new Error(`Ошибка отправки заявки в Telegram: ${error instanceof Error ? error.message : String(error)}`, { cause: error })
+            }
 
             return NextResponse.json({
                 success: true,

@@ -13,7 +13,6 @@ function findId (text: string) {
     const regExp = /Телеграм\s*id\s*\(для\s*связи\)\s*-\s*(\d+)/i
 
     const findId = text.match(regExp)
-    console.log(findId)
     return findId
 }
 
@@ -28,7 +27,6 @@ export const POST = async (req: NextRequest) => {
         const id = findId(data.payload.title) ?? []
 
         if (id.length < 1) {
-            console.log('Данный тип заявки не проходил через сайт zakaz.ufanet.ru')
             return NextResponse.json({
                 success: false,
                 message: 'Данный тип заявки не проходил через сайт zakaz.ufanet.ru',
@@ -36,7 +34,6 @@ export const POST = async (req: NextRequest) => {
             })
         }
 
-        console.log('ID ', id[1])
         
 
 
@@ -47,28 +44,24 @@ export const POST = async (req: NextRequest) => {
         let message;
 
         if (data.event === 'task-created') {
-            console.log('Проверка на создания новой карточки')
             const columnTask = await getYGColumns(data.payload.columnId, key, url)
 
-            console.log(`Карточка ${data.payload.title} создана и перемещена в колонку ${columnTask.data.title as string}`)
             message = `Новая заявка \n\n\n ${data.payload.title} \n\n\n\n\n\n\n Колонка "${columnTask.data.title as string}"`
 
             //  Отправка пользователю
 
             try {
-                const messageAuthor = await bot.sendMessage(id[1], message)
-                console.log(`Сообщение отправлено пользователю c id ${id[1]}`)
+                await bot.sendMessage(id[1], message)
             } catch (error: Error | any) {
                 if (error.response?.statusCode === 403) {
-                    console.log('Пользователь не начал диалог с ботом или заблокировал его');
+                    console.error('Пользователь не начал диалог с ботом или заблокировал его');
                 } else {
-                    console.log(error.message);
+                    console.error(error.message);
                 }
             }
 
 
-            const messageGroup = await bot.sendMessage('-5141005635', message)
-            console.log(messageGroup)
+            await bot.sendMessage('-5141005635', message)
 
             // 
 
@@ -84,10 +77,8 @@ export const POST = async (req: NextRequest) => {
 
         if (data.event === 'task-moved') {
 
-            console.log('Проверяю статуст перемещения задачи')
 
             if (JSON.stringify(data.payload.columnId) === JSON.stringify(data.prevData.columnId)) {
-            console.log('Карточка осталась на текущей доске')
             return NextResponse.json({
                 success: true,
                 message: 'Карточка осталась на текущей доске',
@@ -98,7 +89,6 @@ export const POST = async (req: NextRequest) => {
             const newColumn = await getYGColumns(data.payload.columnId, key, url)
 
             if (newColumn.data.title === 'Входящие заявки с сайта ufanet.zakaz') {
-            console.log('Данная колонка попадает в исключение')
             return NextResponse.json({
                 success: true,
                 message: 'Данная колонка попадает в исключение',
@@ -108,24 +98,21 @@ export const POST = async (req: NextRequest) => {
 
             if (!newColumn.data) return newColumn.message
 
-            console.log(`Карточка ${data.payload.title} перемещена - новая доска ${newColumn.data.title as string}`)
             message = `Карточка ${data.payload.title} \n\n\n\n\n\n\n Перемещена в "${newColumn.data.title as string}"`
 
             //  Отправка пользователю
 
             try {
-                const messageAuthor = await bot.sendMessage(id[1], message)
-                console.log(`Сообщение отправлено пользователю c id ${id[1]}`)
+                await bot.sendMessage(id[1], message)
             } catch (error: Error | any) {
                 if (error.response?.statusCode === 403) {
-                    console.log('Пользователь не начал диалог с ботом или заблокировал его');
+                    console.error('Пользователь не начал диалог с ботом или заблокировал его');
                 } else {
-                    console.log(error.message);
+                    console.error(error.message);
                 }
             }
 
-            const messageGroup = await bot.sendMessage('-5141005635', message)
-            console.log(messageGroup)
+            await bot.sendMessage('-5141005635', message)
 
             // 
 
@@ -148,7 +135,6 @@ export const POST = async (req: NextRequest) => {
 
 
             if (JSON.stringify(prevUser) === JSON.stringify(payloadUser)) {
-                console.log('Данные о пользователях не изменились')
                 return NextResponse.json({
                     success: true,
                     message: 'Данные о пользователях не изменились',
@@ -159,24 +145,21 @@ export const POST = async (req: NextRequest) => {
 
             if (!payloadUser) return newUser.message
         
-            console.log(`Назначен новый испольнитель(и) - получаю новый список ${(!payloadUser) ? "СПИСОК ПУСТ" : JSON.stringify(newUser.data.map((item: any) => item.name).join(','))}`)
             message = `Назначен новый испольнитель(и) - получаю новый список ${(!payloadUser) ? "СПИСОК ПУСТ" : JSON.stringify(newUser.data.map((item: any) => item.name).join(','))}`
 
             //  Отправка пользователю 
 
             
                 try {
-                    const messageAuthor = await bot.sendMessage(id[1], message)
-                    console.log(`Сообщение отправлено пользователю c id ${id[1]}`)
+                    await bot.sendMessage(id[1], message)
                 } catch (error: Error | any) {
                     if (error.response?.statusCode === 403) {
-                        console.log('Пользователь не начал диалог с ботом или заблокировал его');
+                        console.error('Пользователь не начал диалог с ботом или заблокировал его');
                     } else {
-                        console.log(error.message);
+                        console.error(error.message);
                     }
                 }
-                const messageGroup = await bot.sendMessage('-5141005635', message)
-                console.log(messageGroup)
+                await bot.sendMessage('-5141005635', message)
 
             // 
 
@@ -199,7 +182,6 @@ export const POST = async (req: NextRequest) => {
 
 
             if (JSON.stringify(prevSticker) === JSON.stringify(payloadSticker)) {
-                console.log('Данные стикеров не изменились')
                 return NextResponse.json({
                     success: true,
                     message: 'Данные стикеров не изменились',
@@ -216,17 +198,16 @@ export const POST = async (req: NextRequest) => {
             //  Отправка пользователю
 
             try {
-                const messageAuthor = await bot.sendMessage(id[1], messageFromSticeker)
-                console.log(`Сообщение отправлено пользователю c id ${id[1]}`)
+                await bot.sendMessage(id[1], messageFromSticeker)
             } catch (error: Error | any) {
                 if (error.response?.statusCode === 403) {
-                    console.log('Пользователь не начал диалог с ботом или заблокировал его');
+                    console.error('Пользователь не начал диалог с ботом или заблокировал его');
                 } else {
-                    console.log(error.message);
+                    console.error(error.message);
                 }
             }
 
-            const messageGroup = await bot.sendMessage('-5141005635', messageFromSticeker)
+            await bot.sendMessage('-5141005635', messageFromSticeker)
 
             // 
 

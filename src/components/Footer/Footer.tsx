@@ -28,12 +28,13 @@ const Footer: FC = () => {
 
             <Col md={3} xs={12} className='d-flex justify-content-center align-items-center'>
                 <div className={styles.footer_link}>version 1.026</div>
-                <FaGithub className={styles.footer_icon}/>
-                <Link className={styles.footer_link} target='_blank' href={'https://github.com/metelevnikita'}>разработчик</Link>
+                <Link className={styles.footer_link} target='_blank' href={'https://github.com/metelevnikita'}>
+                    <FaGithub className={styles.footer_icon}/>
+                </Link>
             </Col>
 
             <Col md={4} xs={12} className='d-flex justify-content-md-end justify-content-center align-items-center'>
-                <a className={styles.footer_link} href='https://t.me/MetelevNikita' target='_blank'>техническая поддержка</a>
+                <a className={styles.footer_link} href='https://max.ru/Никита Метелев' target='_blank'>техническая поддержка</a>
                 
             </Col>
 

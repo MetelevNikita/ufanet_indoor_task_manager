@@ -41,7 +41,6 @@ export const POST = async (req: NextRequest) => {
         fs.writeFileSync(path.resolve(uploadFolder, date, filename), buffer)
 
         const url = `${process.env.WEBHOOK_URL}/api/uploads/${type}/${date}/${filename}`
-        console.log(url)
 
         return NextResponse.json({
             success: true,

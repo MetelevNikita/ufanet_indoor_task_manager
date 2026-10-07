@@ -56,7 +56,6 @@ const QrCode: FC<QRcodeProps> = ({
       }
 
       const data = await response.json();
-      console.log('qrcode data ', data)
       setQrCodePath(data.data);
       return data;
     } catch (error) {

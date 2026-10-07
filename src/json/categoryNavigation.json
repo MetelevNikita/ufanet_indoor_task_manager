@@ -12,7 +12,7 @@
         "id": 2,
         "type": "smartscreen",
         "direction": "uk",
-        "title": "Для Бизнеса",
+        "title": "Для бизнеса",
         "subtitle": "Баннер или ролик" ,
         "endpoint": "business"
 
@@ -29,7 +29,7 @@
         "id": 4,
         "type": "clinic",
         "direction": "business",
-        "title": "Для Бизнеса",
+        "title": "Для бизнеса",
         "subtitle": "Видеоролик" ,
         "endpoint": "form?direction=business&type=medical_video" 
     }

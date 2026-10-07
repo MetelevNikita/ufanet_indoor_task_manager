@@ -9,7 +9,6 @@ const WEBHOOK_URL = process.env.TG_WEBHOOK_URL
 export const POST = async (req: NextRequest) => {
     try {
         const body = await req.json()
-        console.log('MESSAGE ', body)
 
         
 

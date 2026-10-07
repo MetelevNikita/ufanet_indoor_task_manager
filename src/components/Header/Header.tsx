@@ -1,6 +1,7 @@
 'use client'
 
 import { FC, useContext } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from 'motion/react'
 import { useRouter } from "next/navigation";
@@ -12,6 +13,8 @@ import { TitleContext } from "@/app/(main)/layout";
 
 // icon
 
+
+import maxLogo from './../../../public/app/MAX — Color background/Form4.png'
 import { FaTelegramPlane } from "react-icons/fa";
 
 // style
@@ -77,9 +80,9 @@ const page: FC = () => {
 
         <Col md={4} className="d-flex justify-content-md-end justify-content-center mb-2">
 
-            <Link target="_blank" href={'https://t.me/MetelevNikita'} className="d-flex justify-content-md-end justify-content-center">
+            <Link target="_blank" href={'https://max.ru/Никита Метелев'} className="d-flex align-items-center justify-content-md-end justify-content-center">
                   <div className={styles.contact_title}>Что-то не работает? Пишите.</div>
-                  <FaTelegramPlane className={styles.contact_icon}/>
+                  <Image width={30} alt="logo" src={maxLogo} className={styles.contact_icon}/>
             </Link>
 
 

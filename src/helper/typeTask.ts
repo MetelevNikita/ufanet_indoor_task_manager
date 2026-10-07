@@ -72,7 +72,7 @@ export function currentTypeTask (direction: string, hasVideo?: any): any {
         case 'medical_video':
             return {
                         type: direction,
-                        label: "Поликлиника ТВ / Для Бизнеса",
+                        label: "Поликлиника ТВ / Для бизнеса",
                         data: medicalVideoField()
                     }
         default:

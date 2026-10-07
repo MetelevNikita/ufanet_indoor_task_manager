@@ -29,13 +29,13 @@ export async function postData (url: string, body: Object, doneMessage: string, 
 
 
 
-        // if (!response.ok) {
-        //     return {
-        //         success: false,
-        //         message: `ERROR fetch API ${response.status} - ${response.statusText}`,
-        //         data: null
-        //     }
-        // }
+        if (!response.ok) {
+            return {
+                success: false,
+                message: `${errorMessage}: ${response.status} - ${response.statusText}`,
+                data: null
+            }
+        }
 
         const data = await response.json()
          return {

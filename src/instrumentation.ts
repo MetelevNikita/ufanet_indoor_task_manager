@@ -55,9 +55,8 @@ async function getYouGileApiKey () {
     )
 
     if (!getApiKey.data[0]) {
-        console.log('Ключи не найдены')
 
-        const createKey = await postData(
+        await postData(
             `${url}/auth/keys`,
             {
                 login: login,
@@ -68,13 +67,11 @@ async function getYouGileApiKey () {
             'Ошибка создания api key YouGile'
         )
 
-        console.log('create key ', createKey)
     }
 
 
     const key = getApiKey.data[0].key
     process.env.YG_API_KEY = getApiKey.data[0].key
-    console.log('Ключ авторизации Yougile успешно сохранен')
     return {
         success: true,
         message: 'Ключ авторизации Yougile успешно сохранен',
@@ -107,10 +104,9 @@ async function createWebhookTelegram () {
             keepAlive: false,
             timeout: 30000
         })
-        console.log('# Зауск вебхука TELEGRAM')
 
         if (!process.env.WEBHOOK_URL || !process.env.TG_BOT_TOKEN) {
-            console.log('Нет входных параметров')
+            console.error('Нет входных параметров')
             return {
                 success: false,
                 message: 'Нет входных параметров',
@@ -175,14 +171,12 @@ async function createWebHookYouGile () {
     try {
 
 
-        console.log('# Зауск вебхука YouGile')
 
         const url = process.env.YG_BASE_URL as string
         const webhookUrl = process.env.WEBHOOK_URL as string
         const key = process.env.YG_API_KEY as string
 
         if (!url || !webhookUrl || !key) {
-            console.log('asdasdasd')
             return {
                 success: false,
                 message: `Входные данные для создания вебхука отсутсвуют`,
@@ -212,7 +206,6 @@ async function createWebHookYouGile () {
         }
 
 
-        console.log('WEBHOOKS ', getAllWebhooks)
 
         const checkCreateWebhook = getAllWebhooks.data.find((item: {url: string}) => item.url == `${webhookUrl}/api/webhook/yougile`) ?? null
 
@@ -221,10 +214,8 @@ async function createWebHookYouGile () {
         let resulWwebhook
 
         if (checkCreateWebhook) {
-            console.log('ВЕБХУК НАЙДЕН ', checkCreateWebhook)
             resulWwebhook = checkCreateWebhook
         } else {
-            console.log('ВЕБХУК НЕ ОБНАРУЖЕН - Запускаю создание')
 
             const webhookYougile = await postData(
                 `${url}/webhooks`,
@@ -237,7 +228,6 @@ async function createWebHookYouGile () {
                 key
             )
 
-            console.log('НОВЫЙ ВЕБХУК СОЗДАН ', webhookYougile)
             resulWwebhook = webhookYougile
         }
 
@@ -271,14 +261,12 @@ async function deleteAllWebhooks () {
     try {
 
 
-        console.log('# Зауск удаления вебхука YouGile')
 
         const url = process.env.YG_BASE_URL as string
         const webhookUrl = process.env.WEBHOOK_URL as string
         const key = process.env.YG_API_KEY as string
 
         if (!url || !webhookUrl || !key) {
-            console.log('asdasdasd')
             return {
                 success: false,
                 message: `Входные данные для создания вебхука отсутсвуют`,
@@ -293,7 +281,6 @@ async function deleteAllWebhooks () {
             key
         )
 
-        console.log(getAllWebhooks)
 
         // #### Если нужно удалить подписки
 
@@ -310,11 +297,9 @@ async function deleteAllWebhooks () {
                 })
             })
 
-            const data = await response.json()
-            console.log('DATA DELETED ', data)
+            await response.json()
         }
 
-        console.log('Вебхуки очищены')
         return {
             success: false,
             message: `Вебхуки очищены`,
@@ -344,9 +329,8 @@ async function startServices () {
 
         if (process.env.NEXT_RUNTIME === 'nodejs') {
 
-        console.log('Запуск служб сервиса ufanet_indoor')
  
-        const result = await Promise.all(
+        await Promise.all(
             [
                 await getYouGileApiKey(),
                 await createWebhookTelegram(),
@@ -354,13 +338,11 @@ async function startServices () {
                 await createWebHookYouGile()
             ]
         ).catch((error) => {
-            console.log(error)
+            console.error(error)
             return error
         })
 
 
-        console.log(result)
-        console.log('Все сервисы запущены')
 
         }
         

@@ -1,7 +1,6 @@
 export async function getYGUsers(payload: any, key: string, url: string): Promise<any> {
   try {
 
-    console.log("PAYLOAD", payload)
 
 
     if (!payload) {

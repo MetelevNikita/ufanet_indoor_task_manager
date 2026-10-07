@@ -121,7 +121,6 @@ const Form: FC<FormProps> = ({endpoint}) => {
 
     const currentDirectionForm = currentTypeTask(type, dataForm.selfVideo?.data[0]) ?? null
 
-    console.log(currentDirectionForm)
 
     useEffect(() => {
         dateTypeValidator()
@@ -131,15 +130,12 @@ const Form: FC<FormProps> = ({endpoint}) => {
     function dateTypeValidator () {
 
       const { type } = currentDirectionForm
-      console.log(type)
 
       if (type == 'uk_text' || type == 'uk_banner' || type == 'uk_qrcode' || type == 
         'doctor_video' || type == 'doctor_subtitle'
       ) {
-        console.log('Условие на 1 день')
         setDateValidator({text: 'Дата не может приниматься задним числом', numDays: 1})
       } else {
-        console.log('условие на 3 дня')
         setDateValidator({text: 'Нельзя выбрать начальную дату размещения ранее, чем на 3 рабочих дня от текущей', numDays: 3})
       }
       
@@ -226,7 +222,6 @@ const Form: FC<FormProps> = ({endpoint}) => {
                           dateValidator={dateValidator}
                           onChange={(e: any) => {
 
-                              console.log('GET DATE')
 
                               const value = e.target.value
 
