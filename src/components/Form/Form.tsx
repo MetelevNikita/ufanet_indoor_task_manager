@@ -192,7 +192,7 @@ const Form: FC<FormProps> = ({endpoint}) => {
                             }))
                           }}
                           error={errors[item.name]}
-                          max={200}
+                          max={400}
                           control={true}                 
                         /></Col>
               case 'select':
