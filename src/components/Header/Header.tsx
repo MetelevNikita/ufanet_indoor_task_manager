@@ -78,9 +78,8 @@ const page: FC = () => {
           </div>
         </Col> */}
 
-        <Col md={4} className="d-flex justify-content-md-end justify-content-center mb-2">
-
-            <Link target="_blank" href={'https://max.ru/Никита Метелев'} className="d-flex align-items-center justify-content-md-end justify-content-center">
+        <Col md={4} className="d-flex justify-content-md-end justify-content-center mb-2"> 
+            <Link target="_blank" href={'https://max.ru/u/f9LHodD0cOKzVPomWSFRzoCkHYafg2ttM7w2382vcEnOqTAoar9V-zYh5e8'} className="d-flex align-items-center justify-content-md-end justify-content-center">
                   <div className={styles.contact_title}>Что-то не работает? Пишите.</div>
                   <Image width={30} alt="logo" src={maxLogo} className={styles.contact_icon}/>
             </Link>

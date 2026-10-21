@@ -34,7 +34,7 @@ const Footer: FC = () => {
             </Col>
 
             <Col md={4} xs={12} className='d-flex justify-content-md-end justify-content-center align-items-center'>
-                <a className={styles.footer_link} href='https://max.ru/Никита Метелев' target='_blank'>техническая поддержка</a>
+                <a className={styles.footer_link} href='https://max.ru/u/f9LHodD0cOKzVPomWSFRzoCkHYafg2ttM7w2382vcEnOqTAoar9V-zYh5e8' target='_blank'>техническая поддержка</a>
                 
             </Col>
 
