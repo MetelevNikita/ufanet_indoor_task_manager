@@ -84,7 +84,7 @@ export function uk_textField ()  {
         name: "text",
         type: "area",
         title: "Текст объявления",
-        placeholder: "(до 200 символов)",
+        placeholder: "до 200 символов",
         },
     ]
 

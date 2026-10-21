@@ -143,14 +143,14 @@ export function uk_videoField (hasVideo: string)  {
             name: "text",
             type: "area",
             title: "Основной текст",
-            placeholder: "до 300 символов",
+            placeholder: "до 200 символов",
             },
             {
             id: 15,
             name: "contacts",
             type: "area",
             title: "Контактный блок",
-            placeholder: "до 300 символов",
+            placeholder: "до 200 символов",
             },
             {
             id: 13,
